@@ -786,11 +786,17 @@ function loadState() {
       return s;
     }
   } catch(e){}
+  const BASE = 'https://Sholay1.github.io/soc-course';
   return {
     l1:{modules:[],quizPassed:false,labsDone:[]},
     l2:{modules:[],quizPassed:false,labsDone:[]},
     l3:{modules:[],quizPassed:false,labsDone:[]},
-    videos:{l1:[],l2:[],l3:[]},
+    githubBase: BASE,
+    videos:{
+      l1:[BASE+'/soc-l1-lesson.html',BASE+'/soc-l1-lesson.html',BASE+'/soc-l1-lesson.html'],
+      l2:[BASE+'/soc-l2-lesson.html',BASE+'/soc-l2-lesson.html',BASE+'/soc-l2-lesson.html'],
+      l3:[BASE+'/soc-l3-lesson.html',BASE+'/soc-l3-lesson.html',BASE+'/soc-l3-lesson.html']
+    },
     activity:[]
   };
 }
@@ -1250,7 +1256,19 @@ function renderDashboard() {
 
 function confirmReset() {
   if (confirm('Reset ALL progress? This cannot be undone.')) {
-    PS = {l1:{modules:[],quizPassed:false,labsDone:[]},l2:{modules:[],quizPassed:false,labsDone:[]},l3:{modules:[],quizPassed:false,labsDone:[]},videos:{l1:[],l2:[],l3:[]},activity:[]};
+    const BASE = 'https://Sholay1.github.io/soc-course';
+    PS = {
+      l1:{modules:[],quizPassed:false,labsDone:[]},
+      l2:{modules:[],quizPassed:false,labsDone:[]},
+      l3:{modules:[],quizPassed:false,labsDone:[]},
+      githubBase: BASE,
+      videos:{
+        l1:[BASE+'/soc-l1-lesson.html',BASE+'/soc-l1-lesson.html',BASE+'/soc-l1-lesson.html'],
+        l2:[BASE+'/soc-l2-lesson.html',BASE+'/soc-l2-lesson.html',BASE+'/soc-l2-lesson.html'],
+        l3:[BASE+'/soc-l3-lesson.html',BASE+'/soc-l3-lesson.html',BASE+'/soc-l3-lesson.html']
+      },
+      activity:[]
+    };
     saveState(PS);
     renderDashboard();
     ['l1','l2','l3'].forEach(renderModules);
