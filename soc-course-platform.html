@@ -952,7 +952,7 @@ function renderVideoPanel(level) {
           <div class="video-meta-title">${s.title}</div>
           <div class="video-meta-sub">${s.sub}</div>
         </div>
-        ${hasVideo ? `<button class="video-launch-btn" onclick="openVideoOverlay('${url}','${s.title}')">▶ LAUNCH LESSON</button>` : ''}
+        ${hasVideo ? `<button class="video-launch-btn" onclick="openVideoOverlay('${url}','${s.title}')">▶ OPEN LESSON IN NEW TAB</button>` : ''}
         <div class="video-url-input">
           <input type="text" id="vid-input-${level}-${i}" placeholder="${hint}" value="${url}" onkeydown="if(event.key==='Enter')embedVideo('${level}',${i})">
           <button class="video-url-btn" onclick="embedVideo('${level}',${i})">EMBED</button>
@@ -1013,25 +1013,10 @@ function getEmbedHtml(url) {
 }
 
 function openVideoOverlay(url, title) {
-  const overlay = document.getElementById('video-overlay');
-  const frame = document.getElementById('overlay-frame');
-  const label = document.getElementById('overlay-title');
-  frame.src = url;
-  label.textContent = title.toUpperCase();
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  window.open(url, '_blank');
 }
 
-function closeVideoOverlay() {
-  const overlay = document.getElementById('video-overlay');
-  const frame = document.getElementById('overlay-frame');
-  frame.src = '';
-  overlay.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Close overlay with Escape key
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoOverlay(); });
+function closeVideoOverlay() {}
 
 function getThumbHtml(title, level) {
   const colors = {l1:'rgba(0,212,255,0.15)',l2:'rgba(123,79,255,0.15)',l3:'rgba(255,61,90,0.15)'};
